@@ -1,0 +1,11 @@
+{
+	"id": "obsidian-tengwar",
+	"name": "Obsidian Tengwar",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "Support Tengwar (The Elvish Letter)",
+	"author": "Michael Vetkin",
+	"authorUrl": "https://mikevetkin.com",
+	"fundingUrl": "https://mikevetkin.com",
+	"isDesktopOnly": false
+}
