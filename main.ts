@@ -22,11 +22,21 @@ export default class ObsidianTengwar extends Plugin {
 		this.registerMarkdownCodeBlockProcessor('teng', (source, el, ctx) => {
             // Render chess board
 			// Здесь можно и настройки прокинуть
-			// const targetSymbol = (luva: string) => `<span class="luva">${luva}</span>`;
+			// Нужно через настройки уметь их менять
+			// Также прочитать, как это писать-то ёпта
+			const targetSymbol = (luva: string) => `<span class="luva">${luva}</span>`;
 
-			// const formatted = source.replaceAll(/[\u00C0-\u00FF]+/g, targetSymbol)
+			// Вынести
+			const tengCsurRegExp = /[\uE040-\uE05D]+/g;
 
-            el.innerHTML = `<div class="tengwar-font">${source}</div>`;
+			const isTengCsur = tengCsurRegExp.test(source);
+
+			// Сделать так, чтобы выключалась в настройках
+			const formatted = source.replaceAll(tengCsurRegExp, targetSymbol);
+
+			const className = isTengCsur ? 'tengwar-csur' : 'tengwar';
+
+            el.innerHTML = `<sapn class="${className}">${formatted}</sapn>`;
         })
 
 		// This creates an icon in the left ribbon.
