@@ -31,12 +31,15 @@ export default class ObsidianTengwar extends Plugin {
 
 			const isTengCsur = tengCsurRegExp.test(source);
 
+			console.log('source :>> ', source, el, ctx);
+
 			// Сделать так, чтобы выключалась в настройках
 			const formatted = source.replaceAll(tengCsurRegExp, targetSymbol);
+			const formattedWithEnter = formatted.replaceAll(/\n/g, '<br />');
 
 			const className = isTengCsur ? 'tengwar-csur' : 'tengwar';
 
-            el.innerHTML = `<sapn class="${className}">${formatted}</sapn>`;
+            el.innerHTML = `<div class="${className}">${formattedWithEnter}</div>`;
         })
 
 		// This creates an icon in the left ribbon.
