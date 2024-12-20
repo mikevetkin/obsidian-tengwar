@@ -6,12 +6,15 @@ available in the app when your plugin is enabled.
 If your plugin does not need CSS, delete this file.
 
 */
+
 .tengwar {
 	font-family: 'Tengwar Annatar', 'Tengwar Eldamar', 'Tengwar Noldor', 'Tengwar Parmaite', 'Tengwar Formal', 'Tengwar Elfica', 'Tengwar Sindarin', 'Tengwar Quenya', 'Tengwar Gothika';
+	font-size: 1.2rem;
 }
 
 .tengwar-csur {
 	font-family: 'Tengwar Formal CSUR';
+	font-size: 1.2rem;
 }
 
 .luva {
