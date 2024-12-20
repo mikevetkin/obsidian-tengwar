@@ -3,15 +3,16 @@ import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Set
 // Remember to rename these classes and interfaces!
 
 interface ObsidianTengwarSettings {
-	mySetting: string;
+	isHighlightedLuvas: boolean;
+	tengFont: string;
+	tengCsurFont: string;
 }
 
 const DEFAULT_SETTINGS: ObsidianTengwarSettings = {
-	mySetting: 'default'
+	isHighlightedLuvas: true,
+	tengFont: 'Tengwar Annatar',
+	tengCsurFont: 'Tengwar Formal CSUR',
 }
-
-const removePrefix = (value: any, prefix: any): string =>
-    value.startsWith(prefix) ? value.slice(prefix.length) : value;
 
 export default class ObsidianTengwar extends Plugin {
 	settings: ObsidianTengwarSettings;
@@ -31,16 +32,15 @@ export default class ObsidianTengwar extends Plugin {
 
 			const isTengCsur = tengCsurRegExp.test(source);
 
-			console.log('source :>> ', source, el, ctx);
-
-			// Сделать так, чтобы выключалась в настройках
-			const formatted = source.replaceAll(tengCsurRegExp, targetSymbol);
-			const formattedWithEnter = formatted.replaceAll(/\n/g, '<br />');
+			const replacedEntersSource = source.replaceAll(/\n/g, '<br />');
+			const formatted = replacedEntersSource.replaceAll(tengCsurRegExp, targetSymbol);
 
 			const className = isTengCsur ? 'tengwar-csur' : 'tengwar';
 
-            el.innerHTML = `<div class="${className}">${formattedWithEnter}</div>`;
-        })
+			const resultSource = this.settings.isHighlightedLuvas ? formatted : replacedEntersSource;
+
+            el.innerHTML = `<div class="${className}">${resultSource}</div>`;
+        });
 
 		// This creates an icon in the left ribbon.
 		// const ribbonIconEl = this.addRibbonIcon('dice', 'Sample Plugin', (evt: MouseEvent) => {
@@ -91,8 +91,10 @@ export default class ObsidianTengwar extends Plugin {
 		// 	}
 		// });
 
-		// This adds a settings tab so the user can configure various aspects of the plugin
-		// this.addSettingTab(new SampleSettingTab(this.app, this));
+		/**
+		 * This adds a settings tab so the user can configure various aspects of the plugin
+		 */
+		this.addSettingTab(new SampleSettingTab(this.app, this));
 
 		// If the plugin hooks up any global DOM events (on parts of the app that doesn't belong to this plugin)
 		// Using this function will automatically remove the event listener when this plugin is disabled.
@@ -114,6 +116,30 @@ export default class ObsidianTengwar extends Plugin {
 
 	async saveSettings() {
 		await this.saveData(this.settings);
+
+		this.registerMarkdownCodeBlockProcessor('teng', (source, el, ctx) => {
+            // Render chess board
+			// Здесь можно и настройки прокинуть
+			// Нужно через настройки уметь их менять
+			// Также прочитать, как это писать-то ёпта
+			const targetSymbol = (luva: string) => `<span class="luva">${luva}</span>`;
+
+			// Вынести
+			const tengCsurRegExp = /[\uE040-\uE05D]+/g;
+
+			const isTengCsur = tengCsurRegExp.test(source);
+
+			const replacedEntersSource = source.replaceAll(/\n/g, '<br />');
+			const formatted = replacedEntersSource.replaceAll(tengCsurRegExp, targetSymbol);
+
+			const className = isTengCsur ? 'tengwar-csur' : 'tengwar';
+
+			const resultSource = this.settings.isHighlightedLuvas ? formatted : replacedEntersSource;
+
+            el.innerHTML = `<div class="${className}">${resultSource}</div>`;
+        });
+
+		// Сюда вид для чтения тоже
 	}
 }
 
@@ -147,14 +173,35 @@ class SampleSettingTab extends PluginSettingTab {
 		containerEl.empty();
 
 		new Setting(containerEl)
-			.setName('Setting #1')
-			.setDesc('It\'s a secret')
-			.addText(text => text
-				.setPlaceholder('Enter your secret')
-				.setValue(this.plugin.settings.mySetting)
+			.setName('Turn on Luvas highlighting')
+			.setDesc('The vowels will be highlighted')
+			.addToggle(text => text
+				.setValue(this.plugin.settings.isHighlightedLuvas)
 				.onChange(async (value) => {
-					this.plugin.settings.mySetting = value;
+					this.plugin.settings.isHighlightedLuvas = value;
 					await this.plugin.saveSettings();
 				}));
+		
+		new Setting(containerEl)
+		.setName('Tengwar font')
+		.setDesc('In Progress')
+		.addDropdown(text => text
+			// .setPlaceholder('Enter your secret')
+			.setValue(this.plugin.settings.tengFont)
+			.onChange(async (value) => {
+				this.plugin.settings.tengFont = value;
+				await this.plugin.saveSettings();
+			}));
+
+		new Setting(containerEl)
+		.setName('Tengwar CSUR font')
+		.setDesc('In Progress')
+		.addDropdown(text => text
+			// .setPlaceholder('Enter your secret')
+			.setValue(this.plugin.settings.tengFont)
+			.onChange(async (value) => {
+				this.plugin.settings.tengFont = value;
+				await this.plugin.saveSettings();
+			}));
 	}
 }
