@@ -51,9 +51,9 @@ export class SettingsTab extends PluginSettingTab {
 		new Setting(containerEl)
 		.setName('Tengwar font')
 		.setDesc('In Progress')
-		.setDisabled(true)
 		.addDropdown(text => text
 			.setValue(this.plugin.settings.tengFont)
+			.setDisabled(true)
 			.onChange(async (value) => {
 				this.plugin.settings.tengFont = value;
 				await this.plugin.saveSettings();
