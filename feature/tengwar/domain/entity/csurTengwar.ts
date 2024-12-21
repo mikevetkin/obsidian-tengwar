@@ -5,7 +5,7 @@
  * The range of codes is taken from Wikipedia
  * https://en.wikipedia.org/wiki/Tengwar
  */
-export const TENGWAR_CSUR_REG_EXP = /[\uE000-\uE06E]+/g;
+export const TENGWAR_CSUR_REG_EXP = /[^\uE000-\uE06E]/;
 
 /**
  * Special tengwar symbols (Tehtar)
