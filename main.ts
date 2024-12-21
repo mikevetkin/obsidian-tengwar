@@ -1,21 +1,27 @@
-import { App, Modal, Plugin, PluginSettingTab, Setting } from 'obsidian';
+import { CodeBlockProcessor, PluginCodeBlockProcessor } from 'core/types';
+import { DEFAULT_PLUGIN_SETTINGS } from 'feature/settings/domain/entity/default-plugin-settings';
+import { PluginSettings } from 'feature/settings/domain/entity/plugin-settings';
+import { SettingsTab } from 'feature/settings/ui/settings-tab';
+import { TENGWAR_CSUR_REG_EXP, TENGWAR_TEHTAR_CSUR_REG_EXP } from 'feature/tengwar/domain/entity/csurTengwar';
+import { Plugin } from 'obsidian';
 
-interface ObsidianTengwarSettings {
-	isHighlightedTehtar: boolean;
-	tehtarColor: string;
-	tengFont: string;
-	tengCsurFont: string;
-}
+const tengProcessor: PluginCodeBlockProcessor = (settings) => (source, el, ctx) => {
+	const targetSymbol = (tehtar: string) => `<span style="color: ${settings.tehtarColor}">${tehtar}</span>`;
 
-const DEFAULT_SETTINGS: ObsidianTengwarSettings = {
-	isHighlightedTehtar: true,
-	tehtarColor: '#A78AF9',
-	tengFont: 'Tengwar Annatar',
-	tengCsurFont: 'Tengwar Formal CSUR',
+	const isTengCsur = TENGWAR_CSUR_REG_EXP.test(source);
+
+	const replacedEntersSource = source.replaceAll(/\n/g, '<br />');
+	const formatted = replacedEntersSource.replaceAll(TENGWAR_TEHTAR_CSUR_REG_EXP, targetSymbol);
+
+	const className = isTengCsur ? 'tengwar-csur' : 'tengwar-annatar';
+
+	const resultSource = settings.isHighlightedTehtar ? formatted : replacedEntersSource;
+
+	el.innerHTML = `<div class="${className}">${resultSource}</div>`;
 }
 
 export default class ObsidianTengwar extends Plugin {
-	settings: ObsidianTengwarSettings;
+	settings: PluginSettings;
 
 	async onload() {
 		await this.loadSettings();
@@ -23,28 +29,12 @@ export default class ObsidianTengwar extends Plugin {
 		/**
 		 * Add code block processor for 'teng'
 		 */
-		this.registerMarkdownCodeBlockProcessor('teng', (source, el, ctx) => {
-            // Render chess board
-			const targetSymbol = (tehtar: string) => `<span style="color: ${this.settings.tehtarColor}">${tehtar}</span>`;
-
-			const tengCsurRegExp = /[\uE040-\uE05D]+/g;
-
-			const isTengCsur = tengCsurRegExp.test(source);
-
-			const replacedEntersSource = source.replaceAll(/\n/g, '<br />');
-			const formatted = replacedEntersSource.replaceAll(tengCsurRegExp, targetSymbol);
-
-			const className = isTengCsur ? 'tengwar-csur' : 'tengwar-annatar';
-
-			const resultSource = this.settings.isHighlightedTehtar ? formatted : replacedEntersSource;
-
-            el.innerHTML = `<div class="${className}">${resultSource}</div>`;
-        });
+		this.registerMarkdownCodeBlockProcessor('teng', tengProcessor(this.settings));
 
 		/**
 		 * This adds a settings tab so the user can configure various aspects of the plugin
 		 */
-		this.addSettingTab(new SampleSettingTab(this.app, this));
+		this.addSettingTab(new SettingsTab(this.app, this));
 	}
 
 	onunload() {
@@ -52,81 +42,10 @@ export default class ObsidianTengwar extends Plugin {
 	}
 
 	async loadSettings() {
-		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+		this.settings = Object.assign({}, DEFAULT_PLUGIN_SETTINGS, await this.loadData());
 	}
 
 	async saveSettings() {
 		await this.saveData(this.settings);
-	}
-}
-
-class SampleModal extends Modal {
-	constructor(app: App) {
-		super(app);
-	}
-
-	onOpen() {
-		const {contentEl} = this;
-		contentEl.setText('Woah!');
-	}
-
-	onClose() {
-		const {contentEl} = this;
-		contentEl.empty();
-	}
-}
-
-class SampleSettingTab extends PluginSettingTab {
-	plugin: ObsidianTengwar;
-
-	constructor(app: App, plugin: ObsidianTengwar) {
-		super(app, plugin);
-		this.plugin = plugin;
-	}
-
-	display(): void {
-		const {containerEl} = this;
-
-		containerEl.empty();
-
-		new Setting(containerEl)
-			.setName('Turn on Tehtar highlighting')
-			.setDesc('Signs and symbols written above or below letters will be highlighted')
-			.addToggle(text => text
-				.setValue(this.plugin.settings.isHighlightedTehtar)
-				.onChange(async (value) => {
-					this.plugin.settings.isHighlightedTehtar = value;
-					await this.plugin.saveSettings();
-				}));
-
-		new Setting(containerEl)
-		.setName('Color')
-		.setDesc('Color of highlighted Tehtars')
-		.addColorPicker(color => color
-			.setValue(this.plugin.settings.tehtarColor)
-			.onChange(async (value) => {
-				this.plugin.settings.tehtarColor = value;
-				await this.plugin.saveSettings();
-			}));
-		
-		new Setting(containerEl)
-		.setName('Tengwar CSUR font')
-		.setDesc('In Progress')
-		.addDropdown(text => text
-			.setValue(this.plugin.settings.tengFont)
-			.onChange(async (value) => {
-				this.plugin.settings.tengFont = value;
-				await this.plugin.saveSettings();
-			}));
-		
-		new Setting(containerEl)
-		.setName('Tengwar font')
-		.setDesc('In Progress')
-		.addDropdown(text => text
-			.setValue(this.plugin.settings.tengFont)
-			.onChange(async (value) => {
-				this.plugin.settings.tengFont = value;
-				await this.plugin.saveSettings();
-			}));
 	}
 }
