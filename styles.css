@@ -13,7 +13,7 @@ If your plugin does not need CSS, delete this file.
 	padding: var(--size-4-3) var(--size-4-4);
 }
 
-.tengwar-csur {
+.tengwar-formal-csur {
 	font-family: 'Tengwar Formal CSUR';
 	font-feature-settings: "alts" 2;
 	font-size: 1.2rem;
