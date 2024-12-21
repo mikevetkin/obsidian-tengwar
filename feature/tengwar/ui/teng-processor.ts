@@ -14,7 +14,7 @@ export const processCsur = (source: string, settings: PluginSettings): string =>
 export const highlightCsurTehtars = (source: string, settings: PluginSettings): string => {
 	return source.replaceAll(
 		TENGWAR_TEHTAR_CSUR_REG_EXP,
-		(tehtar: string) => `<span style="color: ${settings.tehtarColor}">${tehtar}</span>`,
+		(tehtar: string) => `<span class="tehtar" style="color: ${settings.tehtarColor}">${tehtar}</span>`,
 	)
 }
 

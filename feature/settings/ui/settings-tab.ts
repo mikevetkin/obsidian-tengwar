@@ -22,6 +22,7 @@ export class SettingsTab extends PluginSettingTab {
 				.onChange(async (value) => {
 					this.plugin.settings.isHighlightedTehtar = value;
 					await this.plugin.saveSettings();
+					this.plugin.refresh();
 				}));
 
 		new Setting(containerEl)

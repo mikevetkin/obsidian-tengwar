@@ -4,10 +4,19 @@ import { SettingsTab } from 'feature/settings/ui/settings-tab';
 import { tengProcessor } from 'feature/tengwar/ui/teng-processor';
 import { Plugin } from 'obsidian';
 
-
-
 export default class ObsidianTengwar extends Plugin {
 	settings: PluginSettings;
+
+	refresh() {
+		const elements = document.querySelectorAll(".tehtar");
+
+		elements.forEach((element) => element.classList.toggle("clear-tehtar"));
+
+		console.log('elements :>> ', elements);
+		// const elements = document.getElementsByClassName('tahtar');
+
+		// Array.from(elements).forEach(element => element.getAttribute('style'))
+	}
 
 	async onload() {
 		await this.loadSettings();
@@ -23,9 +32,7 @@ export default class ObsidianTengwar extends Plugin {
 		this.addSettingTab(new SettingsTab(this.app, this));
 	}
 
-	onunload() {
-
-	}
+	onunload() {}
 
 	async loadSettings() {
 		this.settings = Object.assign({}, DEFAULT_PLUGIN_SETTINGS, await this.loadData());
