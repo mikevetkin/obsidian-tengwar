@@ -8,7 +8,7 @@ describe('CSUR', () => {
 		expect(innerHTML).toEqual('<div class="tengwar-formal-csur"></div>');
 	});
 
-	test('The "Tengwar Formal CSUR" font is used for ConScript Unicode Registry', () => {
+	test('The "Tengwar Annatar" font is used for ASCII standart registry', () => {
 		const innerHTML = processAscii('2x%51T`Û');
 
 		expect(innerHTML).toEqual('<div class="tengwar-annatar">2x%51T`Û</div>');
