@@ -33,6 +33,7 @@ export class SettingsTab extends PluginSettingTab {
 			.onChange(async (value) => {
 				this.plugin.settings.tehtarColor = value;
 				await this.plugin.saveSettings();
+				this.plugin.refresh();
 			}));
 		
 		new Setting(containerEl)
@@ -43,6 +44,7 @@ export class SettingsTab extends PluginSettingTab {
 			.onChange(async (value) => {
 				this.plugin.settings.tengFont = value;
 				await this.plugin.saveSettings();
+				this.plugin.refresh();
 			}));
 		
 		new Setting(containerEl)
@@ -53,6 +55,7 @@ export class SettingsTab extends PluginSettingTab {
 			.onChange(async (value) => {
 				this.plugin.settings.tengFont = value;
 				await this.plugin.saveSettings();
+				this.plugin.refresh();
 			}));
 	}
 }

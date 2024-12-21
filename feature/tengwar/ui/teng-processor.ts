@@ -3,25 +3,31 @@ import { TENGWAR_CSUR_REG_EXP, TENGWAR_TEHTAR_CSUR_REG_EXP } from "../domain/ent
 import { Encoding } from "../domain/entity/encoding";
 import { PluginSettings } from "feature/settings/domain/entity/plugin-settings";
 
-export const processCsur = (source: string, settings: PluginSettings): string => {
-	const className = 'tengwar-formal-csur'
+// export const processCsur = (source: string, settings: PluginSettings): string => {
+// 	const innerHTML = settings.isHighlightedTehtar ? addTehtarSpans(source, settings) : source
 
-	const innerHTML = settings.isHighlightedTehtar ? highlightCsurTehtars(source, settings) : source
+// 	return innerHTML;
+// }
 
-	return `<div class="${className}">${innerHTML}</div>`
-}
-
-export const highlightCsurTehtars = (source: string, settings: PluginSettings): string => {
+export const addTehtarSpans = (source: string, settings: PluginSettings): string => {
 	return source.replaceAll(
 		TENGWAR_TEHTAR_CSUR_REG_EXP,
-		(tehtar: string) => `<span class="tehtar" style="color: ${settings.tehtarColor}">${tehtar}</span>`,
+		(tehtar: string) => `<span class="tehtar" style="color: ${settings.isHighlightedTehtar ? settings.tehtarColor : 'unset'}">${tehtar}</span>`,
 	)
 }
 
-export const processAscii = (source: string): string => {
-	const className = 'tengwar-annatar';
+/**
+ * Legacy
+ */
+export const changeTehtar = (source: string, settings: PluginSettings): string => {
 
-	return `<div class="${className}">${source}</div>`
+	const elements = document.querySelectorAll(".tehtar");
+
+	elements.forEach((element) => {
+		element.style.color = settings.isHighlightedTehtar ? settings.tehtarColor : 'unset';
+	}); 
+
+	return source;
 }
 
 export const getEncoding = (source: string): Encoding => {
@@ -32,15 +38,25 @@ export const getEncoding = (source: string): Encoding => {
 	return 'ASCII';
 }
 
-export const processTengwar = (source: string, settings: PluginSettings): string => {
-	const innerHTML = source.replaceAll(/\n/g, '<br />');
+export const addBrs = (source: string, settings: PluginSettings): string => {
+	const innerHTML = source.replaceAll('\n', '<br />');
 
-	switch (getEncoding(source)) {
-		case 'CSUR': return processCsur(innerHTML, settings);
-		case 'ASCII': return processAscii(innerHTML);
+	return innerHTML;
+}
+
+const addTengwarFontClass = (encoding: Encoding) => {
+	switch (encoding) {
+		case 'CSUR':
+			return 'tengwar-formal-csur';
+		case 'ASCII':
+			return 'tengwar-annatar';
 	}
 }
 
 export const tengProcessor: PluginCodeBlockProcessor = (settings) => (source, el, _ctx) => {
-	el.innerHTML = processTengwar(source, settings);
+	const encoding = getEncoding(source);
+
+	el.innerHTML = addTehtarSpans(addBrs(source, settings), settings);
+	el.id = 'teng';
+	el.classList.add(addTengwarFontClass(encoding));
 }

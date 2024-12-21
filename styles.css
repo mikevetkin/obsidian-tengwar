@@ -9,8 +9,8 @@ If your plugin does not need CSS, delete this file.
 
 .tehtar {}
 
-.clear-tehtar {
-	color: unset !important;
+.highlighted-tehtar {
+	color: ;
 }
 
 .tengwar-annatar {

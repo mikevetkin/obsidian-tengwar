@@ -1,21 +1,18 @@
 import { DEFAULT_PLUGIN_SETTINGS } from 'feature/settings/domain/entity/default-plugin-settings';
 import { PluginSettings } from 'feature/settings/domain/entity/plugin-settings';
 import { SettingsTab } from 'feature/settings/ui/settings-tab';
-import { tengProcessor } from 'feature/tengwar/ui/teng-processor';
+import { addBrs, changeTehtar, tengProcessor } from 'feature/tengwar/ui/teng-processor';
 import { Plugin } from 'obsidian';
 
 export default class ObsidianTengwar extends Plugin {
 	settings: PluginSettings;
 
 	refresh() {
-		const elements = document.querySelectorAll(".tehtar");
+		const elements = document.querySelectorAll("#teng");
 
-		elements.forEach((element) => element.classList.toggle("clear-tehtar"));
-
-		console.log('elements :>> ', elements);
-		// const elements = document.getElementsByClassName('tahtar');
-
-		// Array.from(elements).forEach(element => element.getAttribute('style'))
+		elements.forEach((element) => {
+			element.innerHTML = changeTehtar(element.innerHTML, this.settings);
+		});
 	}
 
 	async onload() {
