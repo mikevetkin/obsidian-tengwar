@@ -42,7 +42,7 @@ const addTengwarFontClass = (encoding: Encoding) => {
 		case 'CSUR':
 			return 'TengwarTelcontar';
 		case 'ASCII':
-			return 'tengwar-annatar';
+			return 'TengwarAnnatar';
 	}
 }
 
