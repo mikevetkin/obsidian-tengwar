@@ -3,12 +3,6 @@ import { TENGWAR_CSUR_REG_EXP, TENGWAR_TEHTAR_CSUR_REG_EXP } from "../domain/ent
 import { Encoding } from "../domain/entity/encoding";
 import { PluginSettings } from "feature/settings/domain/entity/plugin-settings";
 
-// export const processCsur = (source: string, settings: PluginSettings): string => {
-// 	const innerHTML = settings.isHighlightedTehtar ? addTehtarSpans(source, settings) : source
-
-// 	return innerHTML;
-// }
-
 export const addTehtarSpans = (source: string, settings: PluginSettings): string => {
 	return source.replaceAll(
 		TENGWAR_TEHTAR_CSUR_REG_EXP,
@@ -16,9 +10,6 @@ export const addTehtarSpans = (source: string, settings: PluginSettings): string
 	)
 }
 
-/**
- * Legacy
- */
 export const changeTehtar = (source: string, settings: PluginSettings): string => {
 
 	const elements = document.querySelectorAll(".tehtar");
@@ -49,7 +40,7 @@ export const addBrs = (source: string, settings: PluginSettings): string => {
 const addTengwarFontClass = (encoding: Encoding) => {
 	switch (encoding) {
 		case 'CSUR':
-			return 'tengwar-formal-csur';
+			return 'TengwarTelcontar';
 		case 'ASCII':
 			return 'tengwar-annatar';
 	}
@@ -60,5 +51,6 @@ export const tengProcessor: PluginCodeBlockProcessor = (settings) => (source, el
 
 	el.innerHTML = addTehtarSpans(addBrs(source, settings), settings);
 	el.id = 'teng';
+	el.classList.add('tengwarBlock')
 	el.classList.add(addTengwarFontClass(encoding));
 }

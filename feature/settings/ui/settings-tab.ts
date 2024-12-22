@@ -40,6 +40,7 @@ export class SettingsTab extends PluginSettingTab {
 		.setName('Tengwar CSUR font')
 		.setDesc('In Progress')
 		.addDropdown(dropdown => dropdown
+			.addOption('tengwar-telcontar', 'Tengwar Telcontar')
 			.addOption('tengwar-formal-csur', 'Tengwar Formal CSUR')
 			.addOption('tengwar-alcarin', 'Tengwar Alcarin')
 			.setValue(this.plugin.settings.tengCsurFont)
