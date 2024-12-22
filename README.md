@@ -2,7 +2,7 @@
 
 > An [Obsidian](https://obsidian.md/) plugin that allows you to add [tengwar](https://en.wikipedia.org/wiki/Tengwar) to your notes
 
-![[./assets/doc-30fps-720px.gif]]
+![./assets/doc-30fps-720px.gif]
 
 To add text in Tengwar to the document, create a [block of code](https://help.obsidian.md/Editing+and+formatting/Basic+formatting+syntax#Code+blocks) and specify the extension `teng`, then paste tengwar text.
 
