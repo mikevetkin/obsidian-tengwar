@@ -15,4 +15,6 @@ At [the moment](https://en.wikipedia.org/wiki/Tengwar) there are two ways to wor
 
 Both ways is supported.
 
+## Contacts
+
 If you have questions or suggestions, text me in Telegram [mikevetkin](https://mikevetkin.t.me) or create issue on [Github](https://github.com/mikevetkin/obsidian-tengwar).
