@@ -1,7 +1,7 @@
 {
   "isHighlightedTehtar": true,
   "tehtarColor": "#8559ed",
-  "tengCsurFont": "Tengwar Formal CSUR",
-  "tengFont": "Tengwar Annatar",
+  "tengCsurFont": "tengwar-formal-csur",
+  "tengFont": "tengwar-annatar",
   "isHighlightedLuvas": true
 }

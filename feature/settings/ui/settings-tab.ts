@@ -39,19 +39,22 @@ export class SettingsTab extends PluginSettingTab {
 		new Setting(containerEl)
 		.setName('Tengwar CSUR font')
 		.setDesc('In Progress')
-		.addDropdown(text => text
-			.setValue(this.plugin.settings.tengFont)
+		.addDropdown(dropdown => dropdown
+			.addOption('tengwar-formal-csur', 'Tengwar Formal CSUR')
+			.addOption('tengwar-alcarin', 'Tengwar Alcarin')
+			.setValue(this.plugin.settings.tengCsurFont)
 			.setDisabled(true)
 			.onChange(async (value) => {
-				this.plugin.settings.tengFont = value;
+				this.plugin.settings.tengCsurFont = value;
 				await this.plugin.saveSettings();
 				this.plugin.refresh();
 			}));
 		
 		new Setting(containerEl)
-		.setName('Tengwar font')
+		.setName('Tengwar ASCII font')
 		.setDesc('In Progress')
-		.addDropdown(text => text
+		.addDropdown(dropdown => dropdown
+			.addOption('tengwar-annatar', 'Tengwar Annatar')
 			.setValue(this.plugin.settings.tengFont)
 			.setDisabled(true)
 			.onChange(async (value) => {

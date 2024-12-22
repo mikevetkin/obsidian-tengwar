@@ -4,8 +4,8 @@
 export interface PluginSettings {
 	isHighlightedTehtar: boolean;
 	tehtarColor: string;
-	tengFont: string;
 	tengCsurFont: string;
+	tengFont: string;
 }
 
 export const pluginSettings = (data: Partial<PluginSettings> = {}): PluginSettings => ({
