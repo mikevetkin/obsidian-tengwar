@@ -32,8 +32,6 @@ export const changeTehtar = (source: string, settings: PluginSettings): string =
 
 export const getEncoding = (source: string): Encoding => {
 	const isCSUR = TENGWAR_CSUR_REG_EXP.test(source);
-	// const is = source.split('').find(TENGWAR_CSUR_REG_EXP)
-	console.log('isCSUR :>> ', isCSUR, source);
 
 	if (isCSUR) {
 		return 'CSUR'
