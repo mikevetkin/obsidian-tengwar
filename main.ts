@@ -1,7 +1,7 @@
 import { DEFAULT_PLUGIN_SETTINGS } from 'feature/settings/domain/entity/default-plugin-settings';
 import { PluginSettings } from 'feature/settings/domain/entity/plugin-settings';
 import { SettingsTab } from 'feature/settings/ui/settings-tab';
-import { addBrs, changeTehtar, tengProcessor } from 'feature/tengwar/ui/teng-processor';
+import { addTehtarSpans, tengProcessor } from 'feature/tengwar/ui/teng-processor';
 import { Plugin } from 'obsidian';
 
 export default class TengwarObsidianPlugin extends Plugin {
@@ -11,7 +11,10 @@ export default class TengwarObsidianPlugin extends Plugin {
 		const elements = document.querySelectorAll("#teng");
 
 		elements.forEach((element) => {
-			element.innerHTML = changeTehtar(element.innerHTML, this.settings);
+			const source = element.textContent;
+			element.textContent = "";
+
+			addTehtarSpans(element as HTMLElement, source || '', this.settings);
 		});
 	}
 
