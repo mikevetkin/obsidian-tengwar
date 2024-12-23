@@ -1,5 +1,5 @@
-import TengwarObsidianPlugin from "main";
-import { App, PluginSettingTab, Setting } from "obsidian";
+import TengwarObsidianPlugin from 'main';
+import { App, PluginSettingTab, Setting } from 'obsidian';
 
 export class SettingsTab extends PluginSettingTab {
   plugin: TengwarObsidianPlugin;
@@ -18,13 +18,14 @@ export class SettingsTab extends PluginSettingTab {
     containerEl.empty();
 
     new Setting(containerEl)
-      .setName("Turn on Tehtar highlighting")
+      .setName('Turn on Tehtar highlighting')
       .setDesc(
-        "Signs and symbols written above or below letters will be highlighted",
+        'Signs and symbols written above or below letters will be highlighted',
       )
       .addToggle((text) =>
         text
-          .setValue(this.plugin.settings.isHighlightedTehtar).onChange(async (value) => {
+          .setValue(this.plugin.settings.isHighlightedTehtar)
+          .onChange(async (value) => {
             this.plugin.settings.isHighlightedTehtar = value;
             await this.plugin.saveSettings();
             this.plugin.refresh();
@@ -32,8 +33,9 @@ export class SettingsTab extends PluginSettingTab {
       );
 
     new Setting(containerEl)
-      .setName("Color")
-      .setDesc("Color of highlighted Tehtars").addColorPicker((color) =>
+      .setName('Color')
+      .setDesc('Color of highlighted Tehtars')
+      .addColorPicker((color) =>
         color
           .setValue(this.plugin.settings.tehtarColor)
           .onChange(async (value) => {
@@ -44,12 +46,15 @@ export class SettingsTab extends PluginSettingTab {
       );
 
     new Setting(containerEl)
-      .setName("Tengwar CSUR font")
-      .setDesc("In Progress")
+      .setName('Tengwar CSUR font')
+      .setDesc('In Progress')
       .addDropdown((dropdown) =>
         dropdown
-          .addOption("tengwar-telcontar", "Tengwar Telcontar")
-    .addOption("tengwar-formal-csur", "Tengwar Formal CSUR").addOption("tengwar-alcarin", "Tengwar Alcarin").setValue(this.plugin.settings.tengCsurFont).setDisabled(true)
+          .addOption('tengwar-telcontar', 'Tengwar Telcontar')
+          .addOption('tengwar-formal-csur', 'Tengwar Formal CSUR')
+          .addOption('tengwar-alcarin', 'Tengwar Alcarin')
+          .setValue(this.plugin.settings.tengCsurFont)
+          .setDisabled(true)
           .onChange(async (value) => {
             this.plugin.settings.tengCsurFont = value;
             await this.plugin.saveSettings();
@@ -58,9 +63,14 @@ export class SettingsTab extends PluginSettingTab {
       );
 
     new Setting(containerEl)
-      .setName("Tengwar ASCII font").setDesc("In Progress").addDropdown((dropdown) =>
+      .setName('Tengwar ASCII font')
+      .setDesc('In Progress')
+      .addDropdown((dropdown) =>
         dropdown
-          .addOption("tengwar-annatar", "Tengwar Annatar").setValue(this.plugin.settings.tengFont).setDisabled(true).onChange(async (value) => {
+          .addOption('tengwar-annatar', 'Tengwar Annatar')
+          .setValue(this.plugin.settings.tengFont)
+          .setDisabled(true)
+          .onChange(async (value) => {
             this.plugin.settings.tengFont = value;
             await this.plugin.saveSettings();
             this.plugin.refresh();
