@@ -1,10 +1,10 @@
-import ObsidianTengwar from 'main';
+import TengwarObsidianPlugin from 'main';
 import { App, PluginSettingTab, Setting } from 'obsidian';
 
 export class SettingsTab extends PluginSettingTab {
-	plugin: ObsidianTengwar;
+	plugin: TengwarObsidianPlugin;
 
-	constructor(app: App, plugin: ObsidianTengwar) {
+	constructor(app: App, plugin: TengwarObsidianPlugin) {
 		super(app, plugin);
 		this.plugin = plugin;
 	}

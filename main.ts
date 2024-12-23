@@ -4,7 +4,7 @@ import { SettingsTab } from 'feature/settings/ui/settings-tab';
 import { addBrs, changeTehtar, tengProcessor } from 'feature/tengwar/ui/teng-processor';
 import { Plugin } from 'obsidian';
 
-export default class ObsidianTengwar extends Plugin {
+export default class TengwarObsidianPlugin extends Plugin {
 	settings: PluginSettings;
 
 	refresh() {
