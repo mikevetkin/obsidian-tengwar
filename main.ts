@@ -1,23 +1,23 @@
-import { DEFAULT_PLUGIN_SETTINGS } from "feature/settings/domain/entity/default-plugin-settings";
-import { PluginSettings } from "feature/settings/domain/entity/plugin-settings";
-import { SettingsTab } from "feature/settings/ui/settings-tab";
+import { DEFAULT_PLUGIN_SETTINGS } from 'feature/settings/domain/entity/default-plugin-settings';
+import { PluginSettings } from 'feature/settings/domain/entity/plugin-settings';
+import { SettingsTab } from 'feature/settings/ui/settings-tab';
 import {
   addTehtarSpans,
   tengProcessor,
-} from "feature/tengwar/ui/teng-processor";
-import { Plugin } from "obsidian";
+} from 'feature/tengwar/ui/teng-processor';
+import { Plugin } from 'obsidian';
 
 export default class TengwarObsidianPlugin extends Plugin {
   settings: PluginSettings;
 
   refresh() {
-    const elements = document.querySelectorAll("#teng");
+    const elements = document.querySelectorAll('#teng');
 
     elements.forEach((element) => {
       const source = element.textContent;
-      element.textContent = "";
+      element.textContent = '';
 
-      addTehtarSpans(element as HTMLElement, source || "", this.settings);
+      addTehtarSpans(element as HTMLElement, source || '', this.settings);
     });
   }
 
@@ -28,7 +28,7 @@ export default class TengwarObsidianPlugin extends Plugin {
      * Add code block processor for 'teng'
      */
     this.registerMarkdownCodeBlockProcessor(
-      "teng",
+      'teng',
       tengProcessor(this.settings),
     );
 

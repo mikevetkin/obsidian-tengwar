@@ -12,8 +12,8 @@ export const pluginSettings = (
   data: Partial<PluginSettings> = {},
 ): PluginSettings => ({
   isHighlightedTehtar: false,
-  tehtarColor: "",
-  tengCsurFont: "",
-  tengFont: "",
+  tehtarColor: '',
+  tengCsurFont: '',
+  tengFont: '',
   ...data,
 });
