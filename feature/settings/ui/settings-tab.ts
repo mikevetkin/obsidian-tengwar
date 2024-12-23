@@ -7,6 +7,9 @@ export class SettingsTab extends PluginSettingTab {
   constructor(app: App, plugin: TengwarObsidianPlugin) {
     super(app, plugin);
     this.plugin = plugin;
+    const hello = 1;
+
+    console.log('hello :>> ', hello);
   }
 
   display(): void {
@@ -21,8 +24,7 @@ export class SettingsTab extends PluginSettingTab {
       )
       .addToggle((text) =>
         text
-          .setValue(this.plugin.settings.isHighlightedTehtar)
-          .onChange(async (value) => {
+          .setValue(this.plugin.settings.isHighlightedTehtar).onChange(async (value) => {
             this.plugin.settings.isHighlightedTehtar = value;
             await this.plugin.saveSettings();
             this.plugin.refresh();
