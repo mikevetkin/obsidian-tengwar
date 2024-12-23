@@ -1,1 +1,1 @@
-export type Encoding = 'CSUR' | 'ASCII';
+export type Encoding = "CSUR" | "ASCII";
