@@ -7,9 +7,6 @@ export class SettingsTab extends PluginSettingTab {
   constructor(app: App, plugin: TengwarObsidianPlugin) {
     super(app, plugin);
     this.plugin = plugin;
-    const hello = 1;
-
-    console.log('hello :>> ', hello);
   }
 
   display(): void {
