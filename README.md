@@ -1,4 +1,4 @@
-# Obsidian Tengwar
+# Tengwar for Obsidian
 
 > An [Obsidian](https://obsidian.md/) plugin that allows you to add [tengwar](https://en.wikipedia.org/wiki/Tengwar) to your notes
 
