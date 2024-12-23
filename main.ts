@@ -38,7 +38,7 @@ export default class TengwarObsidianPlugin extends Plugin {
     this.addSettingTab(new SettingsTab(this.app, this));
   }
 
-  onunload() {}
+  // onunload() {}
 
   async loadSettings() {
     this.settings = Object.assign(
