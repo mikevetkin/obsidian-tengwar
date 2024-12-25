@@ -1,3 +1,11 @@
+import {
+  AsciiFont,
+  AsciiFontMap,
+} from 'feature/settings/domain/entity/ascii-font';
+import {
+  CsurFont,
+  CsurFontMap,
+} from 'feature/settings/domain/entity/csur-font';
 import TengwarObsidianPlugin from 'main';
 import { App, PluginSettingTab, Setting } from 'obsidian';
 
@@ -13,6 +21,8 @@ export class SettingsTab extends PluginSettingTab {
     const { containerEl } = this;
 
     containerEl.empty();
+
+    new Setting(containerEl).setName('General').setHeading();
 
     new Setting(containerEl)
       .setName('Turn on Tehtar highlighting')
@@ -42,35 +52,49 @@ export class SettingsTab extends PluginSettingTab {
           }),
       );
 
+    new Setting(containerEl).setName('Font settings').setHeading();
+
     new Setting(containerEl)
-      .setName('Tengwar CSUR font')
-      .setDesc('In Progress')
+      .setName('Tengwar ASCII font')
+      .setDesc('Font family for ASCII tengwar words')
       .addDropdown((dropdown) =>
         dropdown
-          .addOption('tengwar-telcontar', 'Tengwar Telcontar')
-          .addOption('tengwar-formal-csur', 'Tengwar Formal CSUR')
-          .addOption('tengwar-alcarin', 'Tengwar Alcarin')
-          .setValue(this.plugin.settings.tengCsurFont)
-          .setDisabled(true)
-          .onChange(async (value) => {
-            this.plugin.settings.tengCsurFont = value;
+          .addOptions(AsciiFontMap)
+          .setValue(this.plugin.settings.tengAsciiFont)
+          .onChange(async (value: AsciiFont) => {
+            this.plugin.settings.tengAsciiFont = value;
             await this.plugin.saveSettings();
             this.plugin.refresh();
           }),
       );
 
     new Setting(containerEl)
-      .setName('Tengwar ASCII font')
-      .setDesc('In Progress')
+      .setName('Tengwar CSUR font')
+      .setDesc('Font family for CSUR tengwar words')
       .addDropdown((dropdown) =>
         dropdown
-          .addOption('tengwar-annatar', 'Tengwar Annatar')
-          .setValue(this.plugin.settings.tengFont)
-          .setDisabled(true)
-          .onChange(async (value) => {
-            this.plugin.settings.tengFont = value;
+          .addOptions(CsurFontMap)
+          .setValue(this.plugin.settings.tengCsurFont)
+          .onChange(async (value: CsurFont) => {
+            this.plugin.settings.tengCsurFont = value;
             await this.plugin.saveSettings();
             this.plugin.refresh();
+          }),
+      );
+
+    new Setting(containerEl).setName('Codeblock settings').setHeading();
+
+    new Setting(containerEl)
+      .setName('Tengwar keyword')
+      .setDesc('Keyword for Tengwar blocks. Defaults to "teng"')
+      .addText((text) =>
+        text
+          .setPlaceholder('teng')
+          .setValue(this.plugin.settings.tengwarKeywrod)
+          .setDisabled(true)
+          .onChange(async (value) => {
+            this.plugin.settings.tengwarKeywrod = value;
+            await this.plugin.saveSettings();
           }),
       );
   }
