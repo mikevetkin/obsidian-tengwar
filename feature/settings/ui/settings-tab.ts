@@ -61,7 +61,6 @@ export class SettingsTab extends PluginSettingTab {
         dropdown
           .addOptions(AsciiFontMap)
           .setValue(this.plugin.settings.tengAsciiFont)
-          // .setDisabled(true)
           .onChange(async (value: AsciiFont) => {
             this.plugin.settings.tengAsciiFont = value;
             await this.plugin.saveSettings();
@@ -76,7 +75,6 @@ export class SettingsTab extends PluginSettingTab {
         dropdown
           .addOptions(CsurFontMap)
           .setValue(this.plugin.settings.tengCsurFont)
-          // .setDisabled(true)
           .onChange(async (value: CsurFont) => {
             this.plugin.settings.tengCsurFont = value;
             await this.plugin.saveSettings();
