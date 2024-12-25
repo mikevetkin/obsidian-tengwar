@@ -56,7 +56,7 @@ export class SettingsTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName('Tengwar CSUR font')
-      .setDesc('In Progress')
+      .setDesc('Font family for CSUR tengwar words')
       .addDropdown((dropdown) =>
         dropdown
           .addOptions(CsurFontMap)
@@ -71,7 +71,7 @@ export class SettingsTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName('Tengwar ASCII font')
-      .setDesc('In Progress')
+      .setDesc('Font family for ASCII tengwar words')
       .addDropdown((dropdown) =>
         dropdown
           .addOptions(AsciiFontMap)
