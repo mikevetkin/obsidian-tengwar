@@ -6,12 +6,15 @@ import {
 import { Encoding } from '../domain/entity/encoding';
 import { PluginSettings } from 'feature/settings/domain/entity/plugin-settings';
 
-const getTengwarFontClass = (encoding: Encoding) => {
+export const getTengwarFontClass = (
+  encoding: Encoding,
+  settings: PluginSettings,
+) => {
   switch (encoding) {
     case 'CSUR':
-      return 'TengwarTelcontar';
+      return settings.tengCsurFont;
     case 'ASCII':
-      return 'TengwarAnnatar';
+      return settings.tengAsciiFont;
   }
 };
 
@@ -56,5 +59,5 @@ export const tengProcessor: PluginCodeBlockProcessor =
 
     el.id = 'teng';
     el.classList.add('tengwarBlock');
-    el.classList.add(getTengwarFontClass(encoding));
+    el.classList.add(getTengwarFontClass(encoding, settings));
   };

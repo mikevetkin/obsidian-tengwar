@@ -55,21 +55,6 @@ export class SettingsTab extends PluginSettingTab {
     new Setting(containerEl).setName('Font settings').setHeading();
 
     new Setting(containerEl)
-      .setName('Tengwar CSUR font')
-      .setDesc('Font family for CSUR tengwar words')
-      .addDropdown((dropdown) =>
-        dropdown
-          .addOptions(CsurFontMap)
-          .setValue(this.plugin.settings.tengCsurFont)
-          // .setDisabled(true)
-          .onChange(async (value: CsurFont) => {
-            this.plugin.settings.tengCsurFont = value;
-            await this.plugin.saveSettings();
-            this.plugin.refresh();
-          }),
-      );
-
-    new Setting(containerEl)
       .setName('Tengwar ASCII font')
       .setDesc('Font family for ASCII tengwar words')
       .addDropdown((dropdown) =>
@@ -79,6 +64,21 @@ export class SettingsTab extends PluginSettingTab {
           // .setDisabled(true)
           .onChange(async (value: AsciiFont) => {
             this.plugin.settings.tengAsciiFont = value;
+            await this.plugin.saveSettings();
+            this.plugin.refresh();
+          }),
+      );
+
+    new Setting(containerEl)
+      .setName('Tengwar CSUR font')
+      .setDesc('Font family for CSUR tengwar words')
+      .addDropdown((dropdown) =>
+        dropdown
+          .addOptions(CsurFontMap)
+          .setValue(this.plugin.settings.tengCsurFont)
+          // .setDisabled(true)
+          .onChange(async (value: CsurFont) => {
+            this.plugin.settings.tengCsurFont = value;
             await this.plugin.saveSettings();
             this.plugin.refresh();
           }),
