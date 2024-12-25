@@ -1,10 +1,10 @@
 {
   "id": "tengwar",
   "name": "Tengwar",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "minAppVersion": "0.15.0",
   "description": "Support Tengwar (The Elvish Letters)",
   "author": "Michael Vetkin",
   "authorUrl": "https://mikevetkin.com",
-  "isDesktopOnly": true
+  "isDesktopOnly": false
 }
