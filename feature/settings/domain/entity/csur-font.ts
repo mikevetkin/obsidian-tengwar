@@ -1,7 +1,10 @@
-export type CsurFont = 'AlcarinTengwar' | 'TengwarArtano' | 'TengwarTelcontar';
+export type CsurFont =
+  | 'AlcarinTengwar'
+  | 'TengwarAnnatarItalic'
+  | 'TengwarTelcontar';
 
 export const CsurFontMap: Record<CsurFont, string> = {
   AlcarinTengwar: 'Alcarin Tengwar',
-  TengwarArtano: 'Tengwar Artano',
+  TengwarAnnatarItalic: 'Tengwar Artano',
   TengwarTelcontar: 'Tengwar Telcontar',
 };

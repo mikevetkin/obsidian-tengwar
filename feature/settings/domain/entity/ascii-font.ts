@@ -1,7 +1,7 @@
-export type AsciiFont = 'TengwarAnnatar' | 'TengwarEldamar' | 'TengwarPrimaite';
+export type AsciiFont = 'TengwarAnnatar' | 'Eldamar' | 'Parmaite';
 
 export const AsciiFontMap: Record<AsciiFont, string> = {
   TengwarAnnatar: 'Tengwar Annatar',
-  TengwarEldamar: 'Tengwar Eldamar',
-  TengwarPrimaite: 'Tengwar Primate',
+  Eldamar: 'Tengwar Eldamar',
+  Parmaite: 'Tengwar Primate',
 };
