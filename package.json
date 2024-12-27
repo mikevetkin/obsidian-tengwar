@@ -1,6 +1,6 @@
 {
   "name": "obsidian-tengwar",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Support Tengwar (The Elvish Letters) (https://mikevetkin.com)",
   "main": "main.js",
   "scripts": {
