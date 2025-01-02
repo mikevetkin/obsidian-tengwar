@@ -6,9 +6,7 @@ export type CsurFont =
    * TODO: Delete from css
    */
   // | 'TengwarTtfTelcontar'
-  | 'FreeMono'
-  // !TEST
-  | 'TengwarTelcontarScoped';
+  | 'FreeMono';
 
 export const CsurFontMap: Record<CsurFont, string> = {
   Alcarin: 'Alcarin',
@@ -19,5 +17,4 @@ export const CsurFontMap: Record<CsurFont, string> = {
    */
   // TengwarTtfTelcontar: 'Tengwar Telcontar (TTF)',
   FreeMono: 'Free Mono',
-  TengwarTelcontarScoped: 'Tengwar Telcontar Scoped (test)',
 };
