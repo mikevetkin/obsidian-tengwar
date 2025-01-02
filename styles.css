@@ -61,9 +61,7 @@
     format('woff2');
 }
 
-// CSUR
-
-.Alcarin {
+.TestClass {
   font-family: AlcarinTengwar;
 }
 
@@ -81,8 +79,6 @@
   font-family: FreeMonoTengwar;
 }
 
-// ASCII
-
 .Annatar {
   font-family: Annatar;
 }
@@ -96,8 +92,6 @@
   font-family: Parmaite, Annatar;
   vertical-align: 0.2em;
 }
-
-//
 
 .tehtar {
 }
