@@ -1,20 +1,23 @@
 export type CsurFont =
-  | 'AlcarinTengwar'
-  | 'TengwarAnnatarItalic'
-  | 'TengwarTelcontar'
+  | 'Alcarin'
+  | 'Artano'
+  | 'Telcontar'
   /**
    * TODO: Delete from css
    */
   // | 'TengwarTtfTelcontar'
-  | 'FreeMonoTengwarTtf';
+  | 'FreeMono'
+  // !TEST
+  | 'TengwarTelcontarScoped';
 
 export const CsurFontMap: Record<CsurFont, string> = {
-  AlcarinTengwar: 'Alcarin',
-  TengwarAnnatarItalic: 'Artano (italic)',
-  TengwarTelcontar: 'Telcontar',
+  Alcarin: 'Alcarin',
+  Artano: 'Artano (italic)',
+  Telcontar: 'Telcontar',
   /**
    * Not rendered fine on all platforms
    */
   // TengwarTtfTelcontar: 'Tengwar Telcontar (TTF)',
-  FreeMonoTengwarTtf: 'Free Mono',
+  FreeMono: 'Free Mono',
+  TengwarTelcontarScoped: 'Tengwar Telcontar Scoped (test)',
 };
