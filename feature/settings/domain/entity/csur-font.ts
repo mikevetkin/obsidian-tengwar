@@ -9,12 +9,12 @@ export type CsurFont =
   | 'FreeMonoTengwarTtf';
 
 export const CsurFontMap: Record<CsurFont, string> = {
-  AlcarinTengwar: 'Alcarin Tengwar',
-  TengwarAnnatarItalic: 'Tengwar Artano (italic)',
-  TengwarTelcontar: 'Tengwar Telcontar',
+  AlcarinTengwar: 'Alcarin',
+  TengwarAnnatarItalic: 'Artano (italic)',
+  TengwarTelcontar: 'Telcontar',
   /**
    * Not rendered fine on all platforms
    */
   // TengwarTtfTelcontar: 'Tengwar Telcontar (TTF)',
-  FreeMonoTengwarTtf: 'Free Mono Tengwar',
+  FreeMonoTengwarTtf: 'Free Mono',
 };
