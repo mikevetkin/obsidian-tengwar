@@ -42,6 +42,6 @@ export const processTengwar = (
 };
 
 export const tengProcessor: PluginCodeBlockProcessor =
-  (settings) => (source, el, _ctx) => {
+  (settings) => (source, el) => {
     processTengwar(source, el, settings);
   };

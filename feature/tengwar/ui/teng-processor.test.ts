@@ -3,13 +3,13 @@ import { processTengwar } from './teng-processor';
 import { CsurFont } from 'feature/settings/domain/entity/csur-font';
 import { AsciiFont } from 'feature/settings/domain/entity/ascii-font';
 
+let block: HTMLElement;
+
+beforeEach(() => {
+  block = document.createElement('div');
+});
+
 describe('Common requirements', () => {
-  let block: HTMLElement;
-
-  beforeEach(() => {
-    block = document.createElement('div');
-  });
-
   it('Sets a id "teng" for the block', () => {
     processTengwar('text', block, pluginSettings());
 
@@ -24,12 +24,6 @@ describe('Common requirements', () => {
 });
 
 describe('Tengwar CSUR Font settings', () => {
-  let block: HTMLElement;
-
-  beforeEach(() => {
-    block = document.createElement('div');
-  });
-
   const testCases: { font: CsurFont; expectedClass: string }[] = [
     { font: 'Alcarin', expectedClass: 'Alcarin' },
     { font: 'Telcontar', expectedClass: 'Telcontar' },
@@ -53,12 +47,6 @@ describe('Tengwar CSUR Font settings', () => {
 });
 
 describe('Tengwar ASCII Font settings', () => {
-  let block: HTMLElement;
-
-  beforeEach(() => {
-    block = document.createElement('div');
-  });
-
   const testCases: { font: AsciiFont; expectedClass: string }[] = [
     { font: 'Annatar', expectedClass: 'Annatar' },
     { font: 'Eldamar', expectedClass: 'Eldamar' },
@@ -78,4 +66,35 @@ describe('Tengwar ASCII Font settings', () => {
       expect(block.classList.contains(expectedClass)).toBe(true);
     });
   });
+});
+
+it.skip('If CSUR font is selected and tehtar highlighting is disabled, all tehtars is not wrapped in span', () => {
+  const source = '';
+
+  processTengwar(
+    source,
+    block,
+    pluginSettings({
+      tengCsurFont: 'Telcontar',
+      isHighlightedTehtar: false,
+    }),
+  );
+
+  expect(block.textContent).toBe('');
+  expect(block.children).toBe(1);
+});
+
+it.skip('If CSUR font is selected and tehtar highlighting is enabled in the settings, all tehtars is wrapped in span', () => {
+  const source = '';
+
+  processTengwar(
+    source,
+    block,
+    pluginSettings({
+      tengCsurFont: 'Telcontar',
+      isHighlightedTehtar: true,
+    }),
+  );
+
+  expect(block.innerHTML).toBe('');
 });
