@@ -28,12 +28,20 @@ export const addTehtarSpans = (
   }
 };
 
+export const processTengwar = (
+  source: string,
+  el: HTMLElement,
+  settings: PluginSettings,
+) => {
+  const encoding = getEncoding(source);
+  addTehtarSpans(el, source, settings);
+
+  el.id = 'teng';
+  el.classList.add('tengwarBlock');
+  el.classList.add(getTengwarFontClass(encoding, settings));
+};
+
 export const tengProcessor: PluginCodeBlockProcessor =
   (settings) => (source, el, _ctx) => {
-    const encoding = getEncoding(source);
-    addTehtarSpans(el, source, settings);
-
-    el.id = 'teng';
-    el.classList.add('tengwarBlock');
-    el.classList.add(getTengwarFontClass(encoding, settings));
+    processTengwar(source, el, settings);
   };

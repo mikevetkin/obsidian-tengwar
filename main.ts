@@ -1,10 +1,10 @@
 import { DEFAULT_PLUGIN_SETTINGS } from 'feature/settings/domain/entity/default-plugin-settings';
 import { PluginSettings } from 'feature/settings/domain/entity/plugin-settings';
 import { SettingsTab } from 'feature/settings/ui/settings-tab';
+import { getEncoding } from 'feature/tengwar/domain/lib/getEncoding';
+import { getTengwarFontClass } from 'feature/tengwar/domain/lib/getTengwarFontClass';
 import {
   addTehtarSpans,
-  getEncoding,
-  getTengwarFontClass,
   tengProcessor,
 } from 'feature/tengwar/ui/teng-processor';
 import { Plugin } from 'obsidian';
