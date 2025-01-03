@@ -2,6 +2,10 @@ import { pluginSettings } from 'feature/settings/domain/entity/plugin-settings';
 import { processTengwar } from './teng-processor';
 import { CsurFont } from 'feature/settings/domain/entity/csur-font';
 import { AsciiFont } from 'feature/settings/domain/entity/ascii-font';
+import {
+  TENGWAE_CSUR_END,
+  TENGWAR_CSUR_START,
+} from 'feature/tengwar/domain/entity/csurTengwar';
 
 let block: HTMLElement;
 
@@ -20,6 +24,45 @@ describe('Common requirements', () => {
     processTengwar('text', block, pluginSettings());
 
     expect(block.classList.contains('tengwarBlock')).toBe(true);
+  });
+});
+
+describe('ConScript Unicode Registry (U+E000 - U+E07F)', () => {
+  const start = TENGWAR_CSUR_START;
+  const end = TENGWAE_CSUR_END;
+
+  // Array of all tengwar CSUR codes in the range from start to end
+  const tengwarCsurCodes = Array.from(
+    { length: end - start + 1 },
+    (_, index) => start + index,
+  );
+
+  // Array of all tengwar CSUR fonts
+  const tengwarCsurFonts: { font: CsurFont; expectedClass: string }[] = [
+    { font: 'Alcarin', expectedClass: 'Alcarin' },
+    { font: 'Telcontar', expectedClass: 'Telcontar' },
+    { font: 'Artano', expectedClass: 'Artano' },
+    { font: 'FreeMono', expectedClass: 'FreeMono' },
+  ];
+
+  tengwarCsurFonts.forEach(({ font, expectedClass }) => {
+    describe(`${font} have ${expectedClass} className`, () => {
+      tengwarCsurCodes.forEach((code) => {
+        it(`Support symbol U+${code.toString(16).toUpperCase().padStart(4, '0')}`, () => {
+          const tengwarSymbol = String.fromCodePoint(code);
+
+          processTengwar(
+            tengwarSymbol,
+            block,
+            pluginSettings({
+              tengCsurFont: font,
+            }),
+          );
+
+          expect(block.classList.contains(expectedClass)).toBe(true);
+        });
+      });
+    });
   });
 });
 
