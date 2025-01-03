@@ -1,32 +1,8 @@
-import { PluginCodeBlockProcessor } from 'core/types';
-import {
-  TENGWAR_CSUR_REG_EXP,
-  TENGWAR_TEHTAR_CSUR_REG_EXP,
-} from '../domain/entity/csurTengwar';
-import { Encoding } from '../domain/entity/encoding';
 import { PluginSettings } from 'feature/settings/domain/entity/plugin-settings';
-
-export const getTengwarFontClass = (
-  encoding: Encoding,
-  settings: PluginSettings,
-) => {
-  switch (encoding) {
-    case 'CSUR':
-      return settings.tengCsurFont;
-    case 'ASCII':
-      return settings.tengAsciiFont;
-  }
-};
-
-export const getEncoding = (source: string): Encoding => {
-  const isCSUR = TENGWAR_CSUR_REG_EXP.test(source);
-
-  if (isCSUR) {
-    return 'CSUR';
-  }
-
-  return 'ASCII';
-};
+import { TENGWAR_TEHTAR_CSUR_REG_EXP } from '../domain/entity/csurTengwar';
+import { PluginCodeBlockProcessor } from 'core/types';
+import { getEncoding } from 'feature/tengwar/domain/lib/getEncoding';
+import { getTengwarFontClass } from 'feature/tengwar/domain/lib/getTengwarFontClass';
 
 export const addTehtarSpans = (
   element: HTMLElement,
