@@ -89,7 +89,7 @@ describe('ConScript Unicode Registry Tehtars (U+E040 - U+E05D)', () => {
   tengwarCsurFonts.forEach(({ font, expectedClass }) => {
     describe(`${font} have ${expectedClass} className`, () => {
       tengwarCsurCodes.forEach((code) => {
-        it(`Symbol U+${code.toString(16).toUpperCase().padStart(4, '0')} is wrapped to span`, () => {
+        it(`Symbol U+${code.toString(16).toUpperCase().padStart(4, '0')} is wrapped in span with tehtar className`, () => {
           const tengwarSymbol = String.fromCodePoint(code);
 
           processTengwar(
@@ -101,7 +101,6 @@ describe('ConScript Unicode Registry Tehtars (U+E040 - U+E05D)', () => {
             }),
           );
           expect(block.children.length).toBe(1);
-          expect(block.children[0].nodeType).toBe(1);
           expect(block.children[0].tagName).toBe('SPAN');
           expect(block.children[0].textContent).toBe(tengwarSymbol);
           expect(block.children[0].className).toBe('tehtar');
