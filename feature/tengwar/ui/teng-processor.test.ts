@@ -27,6 +27,21 @@ describe('Common requirements', () => {
 
     expect(block.classList.contains('tengwarBlock')).toBe(true);
   });
+
+  it('All new line characters replaced with <br />', () => {
+    const source =
+      '\n\n\n';
+
+    processTengwar(
+      source,
+      block,
+      pluginSettings({
+        tengCsurFont: 'Telcontar',
+      }),
+    );
+
+    expect(block.querySelectorAll('br').length).toBe(3);
+  });
 });
 
 describe('ConScript Unicode Registry (U+E000 - U+E07F)', () => {
@@ -152,22 +167,5 @@ describe('Tengwar ASCII Font settings', () => {
 
       expect(block.classList.contains(expectedClass)).toBe(true);
     });
-  });
-});
-
-describe('New lines', () => {
-  it('All new line characters replaced with <br />', () => {
-    const source =
-      '\n\n\n';
-
-    processTengwar(
-      source,
-      block,
-      pluginSettings({
-        tengCsurFont: 'Telcontar',
-      }),
-    );
-
-    expect(block.querySelectorAll('br').length).toBe(3);
   });
 });
