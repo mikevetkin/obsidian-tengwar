@@ -154,3 +154,20 @@ describe('Tengwar ASCII Font settings', () => {
     });
   });
 });
+
+describe('New lines', () => {
+  it('All new line characters replaced with <br />', () => {
+    const source =
+      '\n\n\n';
+
+    processTengwar(
+      source,
+      block,
+      pluginSettings({
+        tengCsurFont: 'Telcontar',
+      }),
+    );
+
+    expect(block.querySelectorAll('br').length).toBe(3);
+  });
+});
