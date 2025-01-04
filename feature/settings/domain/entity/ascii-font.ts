@@ -1,7 +1,7 @@
-export type AsciiFont = 'Annatar' | 'Eldamar' | 'Parmaite';
+export type AsciiFont = 'annatar' | 'eldamar' | 'primate';
 
 export const AsciiFontMap: Record<AsciiFont, string> = {
-  Annatar: 'Annatar',
-  Eldamar: 'Eldamar',
-  Parmaite: 'Primate',
+  annatar: 'Annatar',
+  eldamar: 'Eldamar',
+  primate: 'Primate',
 };

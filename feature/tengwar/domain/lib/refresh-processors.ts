@@ -1,6 +1,7 @@
 import { PluginSettings } from 'feature/settings/domain/entity/plugin-settings';
 import { ProcessorLanguages } from 'feature/tengwar/domain/entity/processor-languages';
 import { tengProcessor } from 'feature/tengwar/domain/lib/teng-processor';
+import { getTextWithBreaks } from './get-text-with-breaks';
 
 export const refreshProcessors = (settings: PluginSettings) => {
   const elements = document.querySelectorAll('#teng');

@@ -61,34 +61,34 @@
     format('woff2');
 }
 
-.Alcarin {
+.alcarin {
   font-family: AlcarinTengwar;
 }
 
-.Artano {
+.artano {
   font-family: TengwarArtano;
   line-height: 2.6em !important;
 }
 
-.Telcontar {
+.telcontar {
   font-feature-settings: 'alts' 2;
   font-family: TengwarTelcontar;
 }
 
-.FreeMono {
+.freeMono {
   font-family: FreeMonoTengwar;
 }
 
-.Annatar {
+.annatar {
   font-family: Annatar;
 }
 
-.Eldamar {
+.eldamar {
   font-family: Eldamar, Annatar;
   line-height: 1.7em !important;
 }
 
-.Parmaite {
+.primate {
   font-family: Parmaite, Annatar;
   vertical-align: 0.2em;
 }

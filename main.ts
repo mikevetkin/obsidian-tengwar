@@ -1,31 +1,16 @@
 import { DEFAULT_PLUGIN_SETTINGS } from 'feature/settings/domain/entity/default-plugin-settings';
 import { PluginSettings } from 'feature/settings/domain/entity/plugin-settings';
 import { SettingsTab } from 'feature/settings/ui/settings-tab';
-import {
-  ProcessorLanguages,
-  ProcessorLanguagesList,
-} from 'feature/tengwar/domain/entity/processor-languages';
-import {
-  TengProcessor,
-  tengProcessor,
-} from 'feature/tengwar/domain/lib/teng-processor';
+import { ProcessorLanguagesList } from 'feature/tengwar/domain/entity/processor-languages';
+import { refreshProcessors } from 'feature/tengwar/domain/lib/refresh-processors';
+import { tengProcessor } from 'feature/tengwar/domain/lib/teng-processor';
 import { Plugin } from 'obsidian';
 
 export default class TengwarObsidianPlugin extends Plugin {
   settings: PluginSettings;
 
   refresh() {
-    const elements = document.querySelectorAll('#teng');
-
-    elements.forEach((element) => {
-      const source = getTextWithBreaks(element as HTMLElement);
-
-      element.textContent = '';
-      element.className = '';
-      element.id = '';
-
-      tengProcessor(source, element as HTMLElement, this.settings, 'teng');
-    });
+    refreshProcessors(this.settings);
   }
 
   async onload() {
@@ -33,14 +18,14 @@ export default class TengwarObsidianPlugin extends Plugin {
     /**
      * Add code block processor for 'teng'
      */
-    this.reg();
+    this.registerTengwarProcessors();
     /**
      * This adds a settings tab so the user can configure various aspects of the plugin
      */
     this.addSettingTab(new SettingsTab(this.app, this));
   }
 
-  reg() {
+  registerTengwarProcessors() {
     ProcessorLanguagesList.forEach((language) => {
       this.registerMarkdownCodeBlockProcessor(language, (source, el) => {
         tengProcessor(source, el, this.settings, language);

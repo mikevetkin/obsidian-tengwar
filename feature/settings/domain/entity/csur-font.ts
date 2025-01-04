@@ -1,8 +1,8 @@
-export type CsurFont = 'Alcarin' | 'Artano' | 'Telcontar' | 'FreeMono';
+export type CsurFont = 'alcarin' | 'artano' | 'telcontar' | 'freeMono';
 
 export const CsurFontMap: Record<CsurFont, string> = {
-  Alcarin: 'Alcarin',
-  Artano: 'Artano (italic)',
-  Telcontar: 'Telcontar',
-  FreeMono: 'Free Mono',
+  alcarin: 'Alcarin',
+  artano: 'Artano (italic)',
+  telcontar: 'Telcontar',
+  freeMono: 'Free Mono',
 };

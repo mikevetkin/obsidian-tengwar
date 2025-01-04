@@ -1,14 +1,14 @@
 export type ProcessorLanguages =
   | 'teng'
-  | 'teng-Alcarin'
-  | 'teng-Artano'
-  | 'teng-Telcontar'
-  | 'teng-FreeMono';
+  | 'teng-alcarin'
+  | 'teng-artano'
+  | 'teng-telcontar'
+  | 'teng-freemono';
 
 export const ProcessorLanguagesList = [
   'teng',
-  'teng-Alcarin',
-  'teng-Artano',
-  'teng-Telcontar',
-  'teng-FreeMono',
+  'teng-alcarin',
+  'teng-artano',
+  'teng-telcontar',
+  'teng-freemono',
 ] as const;

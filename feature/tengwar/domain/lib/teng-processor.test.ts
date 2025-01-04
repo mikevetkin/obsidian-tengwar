@@ -37,7 +37,7 @@ describe('Common requirements', () => {
       source,
       block,
       pluginSettings({
-        tengCsurFont: 'Telcontar',
+        tengCsurFont: 'telcontar',
       }),
       'teng',
     );
@@ -58,10 +58,10 @@ describe('ConScript Unicode Registry (U+E000 - U+E07F)', () => {
 
   // Array of all tengwar CSUR fonts
   const tengwarCsurFonts: { font: CsurFont; expectedClass: string }[] = [
-    { font: 'Alcarin', expectedClass: 'Alcarin' },
-    { font: 'Telcontar', expectedClass: 'Telcontar' },
-    { font: 'Artano', expectedClass: 'Artano' },
-    { font: 'FreeMono', expectedClass: 'FreeMono' },
+    { font: 'alcarin', expectedClass: 'alcarin' },
+    { font: 'telcontar', expectedClass: 'telcontar' },
+    { font: 'artano', expectedClass: 'artano' },
+    { font: 'freeMono', expectedClass: 'freeMono' },
   ];
 
   tengwarCsurFonts.forEach(({ font, expectedClass }) => {
@@ -98,10 +98,10 @@ describe('ConScript Unicode Registry Tehtars (U+E040 - U+E05D)', () => {
 
   // Array of all tengwar CSUR fonts
   const tengwarCsurFonts: { font: CsurFont; expectedClass: string }[] = [
-    { font: 'Alcarin', expectedClass: 'Alcarin' },
-    { font: 'Telcontar', expectedClass: 'Telcontar' },
-    { font: 'Artano', expectedClass: 'Artano' },
-    { font: 'FreeMono', expectedClass: 'FreeMono' },
+    { font: 'alcarin', expectedClass: 'Alcarin' },
+    { font: 'telcontar', expectedClass: 'telcontar' },
+    { font: 'artano', expectedClass: 'Artano' },
+    { font: 'freeMono', expectedClass: 'FreeMono' },
   ];
 
   tengwarCsurFonts.forEach(({ font, expectedClass }) => {
@@ -131,10 +131,10 @@ describe('ConScript Unicode Registry Tehtars (U+E040 - U+E05D)', () => {
 
 describe('Tengwar CSUR Font settings', () => {
   const testCases: { font: CsurFont; expectedClass: string }[] = [
-    { font: 'Alcarin', expectedClass: 'Alcarin' },
-    { font: 'Telcontar', expectedClass: 'Telcontar' },
-    { font: 'Artano', expectedClass: 'Artano' },
-    { font: 'FreeMono', expectedClass: 'FreeMono' },
+    { font: 'alcarin', expectedClass: 'alcarin' },
+    { font: 'telcontar', expectedClass: 'telcontar' },
+    { font: 'artano', expectedClass: 'artano' },
+    { font: 'freeMono', expectedClass: 'freeMono' },
   ];
 
   testCases.forEach(({ font, expectedClass }) => {
@@ -155,9 +155,9 @@ describe('Tengwar CSUR Font settings', () => {
 
 describe('Tengwar ASCII Font settings', () => {
   const testCases: { font: AsciiFont; expectedClass: string }[] = [
-    { font: 'Annatar', expectedClass: 'Annatar' },
-    { font: 'Eldamar', expectedClass: 'Eldamar' },
-    { font: 'Parmaite', expectedClass: 'Parmaite' },
+    { font: 'annatar', expectedClass: 'annatar' },
+    { font: 'eldamar', expectedClass: 'eldamar' },
+    { font: 'primate', expectedClass: 'primate' },
   ];
 
   testCases.forEach(({ font, expectedClass }) => {
@@ -178,10 +178,10 @@ describe('Tengwar ASCII Font settings', () => {
 
 describe('Font manual mode', () => {
   const testCases: { procLang: ProcessorLanguages; expectedClass: string }[] = [
-    { procLang: 'teng-Alcarin', expectedClass: 'Alcarin' },
-    { procLang: 'teng-Telcontar', expectedClass: 'Telcontar' },
-    { procLang: 'teng-Artano', expectedClass: 'Artano' },
-    { procLang: 'teng-FreeMono', expectedClass: 'FreeMono' },
+    { procLang: 'teng-alcarin', expectedClass: 'alcarin' },
+    { procLang: 'teng-telcontar', expectedClass: 'telcontar' },
+    { procLang: 'teng-artano', expectedClass: 'artano' },
+    { procLang: 'teng-freemono', expectedClass: 'freemono' },
   ];
 
   testCases.forEach(({ procLang, expectedClass }) => {
@@ -190,7 +190,7 @@ describe('Font manual mode', () => {
         '',
         block,
         pluginSettings({
-          tengCsurFont: 'Telcontar',
+          tengCsurFont: 'telcontar',
         }),
         procLang,
       );

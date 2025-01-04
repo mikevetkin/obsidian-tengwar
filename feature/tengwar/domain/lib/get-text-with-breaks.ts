@@ -1,4 +1,4 @@
-function getTextWithBreaks(element: HTMLElement | null): string {
+export const getTextWithBreaks = (element: HTMLElement | null): string => {
   if (!element) return '';
 
   return Array.from(element.childNodes)
@@ -15,4 +15,4 @@ function getTextWithBreaks(element: HTMLElement | null): string {
       return '';
     })
     .join('');
-}
+};

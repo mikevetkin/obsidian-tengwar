@@ -17,8 +17,8 @@ export const pluginSettings = (
 ): PluginSettings => ({
   isHighlightedTehtar: false,
   tehtarColor: '',
-  tengAsciiFont: 'Annatar',
-  tengCsurFont: 'Alcarin',
+  tengAsciiFont: 'annatar',
+  tengCsurFont: 'alcarin',
   tengwarKeywrod: '',
   ...data,
 });
