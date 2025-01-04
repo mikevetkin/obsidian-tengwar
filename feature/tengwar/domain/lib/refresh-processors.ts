@@ -4,7 +4,7 @@ import { tengProcessor } from 'feature/tengwar/domain/lib/teng-processor';
 import { getTextWithBreaks } from './get-text-with-breaks';
 
 export const refreshProcessors = (settings: PluginSettings) => {
-  const elements = document.querySelectorAll('#teng');
+  const elements = document.querySelectorAll('[id^="teng"]');
 
   elements.forEach((element) => {
     const source = getTextWithBreaks(element as HTMLElement);
