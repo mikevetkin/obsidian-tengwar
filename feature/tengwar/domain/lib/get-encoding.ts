@@ -1,4 +1,4 @@
-import { TENGWAR_CSUR_REG_EXP } from '../entity/csurTengwar';
+import { TENGWAR_CSUR_REG_EXP } from '../entity/csur-tengwar';
 import { Encoding } from '../entity/encoding';
 
 export const getEncoding = (source: string): Encoding => {

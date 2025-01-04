@@ -1,5 +1,4 @@
 import { pluginSettings } from 'feature/settings/domain/entity/plugin-settings';
-import { tengProcessor } from './teng-processor';
 import { CsurFont } from 'feature/settings/domain/entity/csur-font';
 import { AsciiFont } from 'feature/settings/domain/entity/ascii-font';
 import {
@@ -7,7 +6,9 @@ import {
   TENGWAR_CSUR_START,
   TENGWAR_TEHTAR_CSUR_END,
   TENGWAR_TEHTAR_CSUR_START,
-} from 'feature/tengwar/domain/entity/csurTengwar';
+} from 'feature/tengwar/domain/entity/csur-tengwar';
+import { tengProcessor } from 'feature/tengwar/domain/lib/teng-processor';
+import { ProcessorLanguages } from 'feature/tengwar/domain/entity/processor-languages';
 
 let block: HTMLElement;
 
@@ -17,13 +18,13 @@ beforeEach(() => {
 
 describe('Common requirements', () => {
   it('Sets a id "teng" for the block', () => {
-    tengProcessor('text', block, pluginSettings());
+    tengProcessor('text', block, pluginSettings(), 'teng');
 
     expect(block.id).toBe('teng');
   });
 
   it('Sets a classname "tengwarBlock" for the block', () => {
-    tengProcessor('text', block, pluginSettings());
+    tengProcessor('text', block, pluginSettings(), 'teng');
 
     expect(block.classList.contains('tengwarBlock')).toBe(true);
   });
@@ -38,6 +39,7 @@ describe('Common requirements', () => {
       pluginSettings({
         tengCsurFont: 'Telcontar',
       }),
+      'teng',
     );
 
     expect(block.querySelectorAll('br').length).toBe(3);
@@ -74,6 +76,7 @@ describe('ConScript Unicode Registry (U+E000 - U+E07F)', () => {
             pluginSettings({
               tengCsurFont: font,
             }),
+            'teng',
           );
 
           expect(block.classList.contains(expectedClass)).toBe(true);
@@ -114,6 +117,7 @@ describe('ConScript Unicode Registry Tehtars (U+E040 - U+E05D)', () => {
               tengCsurFont: font,
               isHighlightedTehtar: true,
             }),
+            'teng',
           );
           expect(block.children.length).toBe(1);
           expect(block.children[0].tagName).toBe('SPAN');
@@ -141,6 +145,7 @@ describe('Tengwar CSUR Font settings', () => {
         pluginSettings({
           tengCsurFont: font,
         }),
+        'teng',
       );
 
       expect(block.classList.contains(expectedClass)).toBe(true);
@@ -163,6 +168,31 @@ describe('Tengwar ASCII Font settings', () => {
         pluginSettings({
           tengAsciiFont: font,
         }),
+        'teng',
+      );
+
+      expect(block.classList.contains(expectedClass)).toBe(true);
+    });
+  });
+});
+
+describe('Font manual mode', () => {
+  const testCases: { procLang: ProcessorLanguages; expectedClass: string }[] = [
+    { procLang: 'teng-Alcarin', expectedClass: 'Alcarin' },
+    { procLang: 'teng-Telcontar', expectedClass: 'Telcontar' },
+    { procLang: 'teng-Artano', expectedClass: 'Artano' },
+    { procLang: 'teng-FreeMono', expectedClass: 'FreeMono' },
+  ];
+
+  testCases.forEach(({ procLang, expectedClass }) => {
+    it(`Supports ${procLang}, sets ${expectedClass} classname for the block`, () => {
+      tengProcessor(
+        '',
+        block,
+        pluginSettings({
+          tengCsurFont: 'Telcontar',
+        }),
+        procLang,
       );
 
       expect(block.classList.contains(expectedClass)).toBe(true);

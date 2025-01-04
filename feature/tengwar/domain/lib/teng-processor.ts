@@ -1,16 +1,28 @@
 import { PluginSettings } from 'feature/settings/domain/entity/plugin-settings';
-import { TENGWAR_TEHTAR_CSUR_REG_EXP } from '../domain/entity/csurTengwar';
+import { TENGWAR_TEHTAR_CSUR_REG_EXP } from '../entity/csur-tengwar';
 import { getEncoding } from 'feature/tengwar/domain/lib/get-encoding';
 import { getTengwarFontClass } from 'feature/tengwar/domain/lib/get-tengwar-font-class';
-import { TengProcessor } from 'core/types';
+import { ProcessorLanguages } from 'feature/tengwar/domain/entity/processor-languages';
 
-export const tengProcessor: TengProcessor = (source, el, settings) => {
+export type TengProcessor = (
+  source: string,
+  el: HTMLElement,
+  settings: PluginSettings,
+  language: ProcessorLanguages,
+) => void;
+
+export const tengProcessor: TengProcessor = (
+  source,
+  el,
+  settings,
+  language,
+) => {
   const encoding = getEncoding(source);
   addTehtarSpans(el, source, settings);
 
-  el.id = 'teng';
+  el.id = language;
   el.classList.add('tengwarBlock');
-  el.classList.add(getTengwarFontClass(encoding, settings));
+  el.classList.add(getTengwarFontClass(encoding, settings, language));
 };
 
 export const addTehtarSpans = (
