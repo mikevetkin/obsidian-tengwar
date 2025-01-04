@@ -1,5 +1,5 @@
 import { pluginSettings } from 'feature/settings/domain/entity/plugin-settings';
-import { processTengwar } from './teng-processor';
+import { tengProcessor } from './teng-processor';
 import { CsurFont } from 'feature/settings/domain/entity/csur-font';
 import { AsciiFont } from 'feature/settings/domain/entity/ascii-font';
 import {
@@ -17,13 +17,13 @@ beforeEach(() => {
 
 describe('Common requirements', () => {
   it('Sets a id "teng" for the block', () => {
-    processTengwar('text', block, pluginSettings());
+    tengProcessor('text', block, pluginSettings());
 
     expect(block.id).toBe('teng');
   });
 
   it('Sets a classname "tengwarBlock" for the block', () => {
-    processTengwar('text', block, pluginSettings());
+    tengProcessor('text', block, pluginSettings());
 
     expect(block.classList.contains('tengwarBlock')).toBe(true);
   });
@@ -32,7 +32,7 @@ describe('Common requirements', () => {
     const source =
       '\n\n\n';
 
-    processTengwar(
+    tengProcessor(
       source,
       block,
       pluginSettings({
@@ -68,7 +68,7 @@ describe('ConScript Unicode Registry (U+E000 - U+E07F)', () => {
         it(`Support symbol U+${code.toString(16).toUpperCase().padStart(4, '0')}`, () => {
           const tengwarSymbol = String.fromCodePoint(code);
 
-          processTengwar(
+          tengProcessor(
             tengwarSymbol,
             block,
             pluginSettings({
@@ -107,7 +107,7 @@ describe('ConScript Unicode Registry Tehtars (U+E040 - U+E05D)', () => {
         it(`Symbol U+${code.toString(16).toUpperCase().padStart(4, '0')} is wrapped in span with tehtar className`, () => {
           const tengwarSymbol = String.fromCodePoint(code);
 
-          processTengwar(
+          tengProcessor(
             tengwarSymbol,
             block,
             pluginSettings({
@@ -135,7 +135,7 @@ describe('Tengwar CSUR Font settings', () => {
 
   testCases.forEach(({ font, expectedClass }) => {
     it(`If the ${font} font is selected and text is Tengwar CSUR, sets ${expectedClass} classname for the block`, () => {
-      processTengwar(
+      tengProcessor(
         '',
         block,
         pluginSettings({
@@ -157,7 +157,7 @@ describe('Tengwar ASCII Font settings', () => {
 
   testCases.forEach(({ font, expectedClass }) => {
     it(`If the ${font} font is selected and text is Tengwar ASCII, sets ${expectedClass} classname for the block`, () => {
-      processTengwar(
+      tengProcessor(
         '9t&5#',
         block,
         pluginSettings({
