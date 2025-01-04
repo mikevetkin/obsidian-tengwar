@@ -1,10 +1,8 @@
 import { DEFAULT_PLUGIN_SETTINGS } from 'feature/settings/domain/entity/default-plugin-settings';
 import { PluginSettings } from 'feature/settings/domain/entity/plugin-settings';
 import { SettingsTab } from 'feature/settings/ui/settings-tab';
-import { getEncoding } from 'feature/tengwar/domain/lib/getEncoding';
-import { getTengwarFontClass } from 'feature/tengwar/domain/lib/getTengwarFontClass';
 import {
-  addTehtarSpans,
+  processTengwar,
   tengProcessor,
 } from 'feature/tengwar/ui/teng-processor';
 import { Plugin } from 'obsidian';
@@ -16,15 +14,13 @@ export default class TengwarObsidianPlugin extends Plugin {
     const elements = document.querySelectorAll('#teng');
 
     elements.forEach((element) => {
-      const source = element.textContent || '';
+      const source = getTextWithBreaks(element as HTMLElement);
 
-      const encoding = getEncoding(source);
       element.textContent = '';
       element.className = '';
+      element.id = '';
 
-      addTehtarSpans(element as HTMLElement, source || '', this.settings);
-      element.classList.add('tengwarBlock');
-      element.classList.add(getTengwarFontClass(encoding, this.settings));
+      processTengwar(source, element as HTMLElement, this.settings);
     });
   }
 
