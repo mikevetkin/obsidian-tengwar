@@ -16,4 +16,7 @@ export const TENGWAR_CSUR_REG_EXP = /[\uE000-\uE07F]/;
  * The range of codes is taken from Wikipedia
  * https://en.wikipedia.org/wiki/Tengwar
  */
-export const TENGWAR_TEHTAR_CSUR_REG_EXP = /[\uE040-\uE05D]/g;
+export const TENGWAR_TEHTAR_CSUR_START = 0xe040;
+export const TENGWAR_TEHTAR_CSUR_END = 0xe05d;
+
+export const TENGWAR_TEHTAR_CSUR_REG_EXP = /[\uE040-\uE05D]/;

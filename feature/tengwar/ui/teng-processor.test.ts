@@ -5,6 +5,8 @@ import { AsciiFont } from 'feature/settings/domain/entity/ascii-font';
 import {
   TENGWAE_CSUR_END,
   TENGWAR_CSUR_START,
+  TENGWAR_TEHTAR_CSUR_END,
+  TENGWAR_TEHTAR_CSUR_START,
 } from 'feature/tengwar/domain/entity/csurTengwar';
 
 let block: HTMLElement;
@@ -60,6 +62,49 @@ describe('ConScript Unicode Registry (U+E000 - U+E07F)', () => {
           );
 
           expect(block.classList.contains(expectedClass)).toBe(true);
+        });
+      });
+    });
+  });
+});
+
+describe('ConScript Unicode Registry Tehtars (U+E040 - U+E05D)', () => {
+  const start = TENGWAR_TEHTAR_CSUR_START;
+  const end = TENGWAR_TEHTAR_CSUR_END;
+
+  // Array of all tengwar tehtar CSUR codes in the range from start to end
+  const tengwarCsurCodes = Array.from(
+    { length: end - start + 1 },
+    (_, index) => start + index,
+  );
+
+  // Array of all tengwar CSUR fonts
+  const tengwarCsurFonts: { font: CsurFont; expectedClass: string }[] = [
+    { font: 'Alcarin', expectedClass: 'Alcarin' },
+    { font: 'Telcontar', expectedClass: 'Telcontar' },
+    { font: 'Artano', expectedClass: 'Artano' },
+    { font: 'FreeMono', expectedClass: 'FreeMono' },
+  ];
+
+  tengwarCsurFonts.forEach(({ font, expectedClass }) => {
+    describe(`${font} have ${expectedClass} className`, () => {
+      tengwarCsurCodes.forEach((code) => {
+        it(`Symbol U+${code.toString(16).toUpperCase().padStart(4, '0')} is wrapped to span`, () => {
+          const tengwarSymbol = String.fromCodePoint(code);
+
+          processTengwar(
+            tengwarSymbol,
+            block,
+            pluginSettings({
+              tengCsurFont: font,
+              isHighlightedTehtar: true,
+            }),
+          );
+          expect(block.children.length).toBe(1);
+          expect(block.children[0].nodeType).toBe(1);
+          expect(block.children[0].tagName).toBe('SPAN');
+          expect(block.children[0].textContent).toBe(tengwarSymbol);
+          expect(block.children[0].className).toBe('tehtar');
         });
       });
     });
