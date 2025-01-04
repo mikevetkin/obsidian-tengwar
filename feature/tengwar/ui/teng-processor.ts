@@ -1,6 +1,5 @@
 import { PluginSettings } from 'feature/settings/domain/entity/plugin-settings';
 import { TENGWAR_TEHTAR_CSUR_REG_EXP } from '../domain/entity/csurTengwar';
-import { PluginCodeBlockProcessor } from 'core/types';
 import { getEncoding } from 'feature/tengwar/domain/lib/getEncoding';
 import { getTengwarFontClass } from 'feature/tengwar/domain/lib/getTengwarFontClass';
 
@@ -40,8 +39,3 @@ export const processTengwar = (
   el.classList.add('tengwarBlock');
   el.classList.add(getTengwarFontClass(encoding, settings));
 };
-
-export const tengProcessor: PluginCodeBlockProcessor =
-  (settings) => (source, el) => {
-    processTengwar(source, el, settings);
-  };

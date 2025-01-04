@@ -10,3 +10,9 @@ export type CodeBlockProcessor = (
 export type PluginCodeBlockProcessor = (
   s: PluginSettings,
 ) => CodeBlockProcessor;
+
+export type ProcessTengwar = (
+  source: string,
+  el: HTMLElement,
+  settings: PluginSettings,
+) => void;
