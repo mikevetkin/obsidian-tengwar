@@ -154,34 +154,3 @@ describe('Tengwar ASCII Font settings', () => {
     });
   });
 });
-
-it.skip('If CSUR font is selected and tehtar highlighting is disabled, all tehtars is not wrapped in span', () => {
-  const source = '';
-
-  processTengwar(
-    source,
-    block,
-    pluginSettings({
-      tengCsurFont: 'Telcontar',
-      isHighlightedTehtar: false,
-    }),
-  );
-
-  expect(block.textContent).toBe('');
-  expect(block.children).toBe(1);
-});
-
-it.skip('If CSUR font is selected and tehtar highlighting is enabled in the settings, all tehtars is wrapped in span', () => {
-  const source = '';
-
-  processTengwar(
-    source,
-    block,
-    pluginSettings({
-      tengCsurFont: 'Telcontar',
-      isHighlightedTehtar: true,
-    }),
-  );
-
-  expect(block.innerHTML).toBe('');
-});
