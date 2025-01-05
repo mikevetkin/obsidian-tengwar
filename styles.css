@@ -100,7 +100,12 @@
 .highlighted-tehtar {
 }
 
+.markdown-source-view.mod-cm6
+.markdown-rendered .tengwarBlock {
+  padding: var(--size-4-3) 0 var(--size-4-3) calc(10px + 1px);
+}
+
 .tengwarBlock {
   font-size: 1.2rem;
-  padding: var(--size-4-3) var(--size-4-6);
+  padding: var(--size-4-3) 0 var(--size-4-3) calc(var(--size-4-6) + 1px);
 }
