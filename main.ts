@@ -1,51 +1,37 @@
 import { DEFAULT_PLUGIN_SETTINGS } from 'feature/settings/domain/entity/default-plugin-settings';
 import { PluginSettings } from 'feature/settings/domain/entity/plugin-settings';
 import { SettingsTab } from 'feature/settings/ui/settings-tab';
-import {
-  addTehtarSpans,
-  getEncoding,
-  getTengwarFontClass,
-  tengProcessor,
-} from 'feature/tengwar/ui/teng-processor';
+import { ProcessorLanguagesList } from 'feature/tengwar/domain/entity/processor-languages';
+import { refreshProcessors } from 'feature/tengwar/domain/lib/refresh-processors';
+import { tengProcessor } from 'feature/tengwar/domain/lib/teng-processor';
 import { Plugin } from 'obsidian';
 
 export default class TengwarObsidianPlugin extends Plugin {
   settings: PluginSettings;
 
   refresh() {
-    const elements = document.querySelectorAll('#teng');
-
-    elements.forEach((element) => {
-      const source = element.textContent || '';
-
-      const encoding = getEncoding(source);
-      element.textContent = '';
-      element.className = '';
-
-      addTehtarSpans(element as HTMLElement, source || '', this.settings);
-      element.classList.add('tengwarBlock');
-      element.classList.add(getTengwarFontClass(encoding, this.settings));
-    });
+    refreshProcessors(this.settings);
   }
 
   async onload() {
     await this.loadSettings();
-
     /**
      * Add code block processor for 'teng'
      */
-    this.registerMarkdownCodeBlockProcessor(
-      'teng',
-      tengProcessor(this.settings),
-    );
-
+    this.registerTengwarProcessors();
     /**
      * This adds a settings tab so the user can configure various aspects of the plugin
      */
     this.addSettingTab(new SettingsTab(this.app, this));
   }
 
-  // onunload() {}
+  registerTengwarProcessors() {
+    ProcessorLanguagesList.forEach((language) => {
+      this.registerMarkdownCodeBlockProcessor(language, (source, el) => {
+        tengProcessor(source, el, this.settings, language);
+      });
+    });
+  }
 
   async loadSettings() {
     this.settings = Object.assign(

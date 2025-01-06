@@ -12,6 +12,14 @@ To add text in Tengwar to the document:
 - specify the extension `teng`;
 - paste tengwar text.
 
+## Apply a specific font on a page
+
+You may need to set different fonts for different notes, other than the main font selected in the settings.
+
+To do this, in the code block, add the font name separated by a `-` to the keyword `teng`.
+
+Examples: `teng`, `teng-annatar`, `teng-eldamar`, `teng-primate`, `teng-alcarin`, `teng-artano`, `teng-telcontar`, `teng-freemono`.
+
 ## Supported encodings
 
 At [the moment](https://en.wikipedia.org/wiki/Tengwar) there are two ways to work with Tengvar on a computer in the community:

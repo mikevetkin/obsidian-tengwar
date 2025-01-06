@@ -7,8 +7,8 @@ import { CsurFont } from 'feature/settings/domain/entity/csur-font';
 export interface PluginSettings {
   isHighlightedTehtar: boolean;
   tehtarColor: string;
-  tengCsurFont: CsurFont;
   tengAsciiFont: AsciiFont;
+  tengCsurFont: CsurFont;
   tengwarKeywrod: string;
 }
 
@@ -17,8 +17,8 @@ export const pluginSettings = (
 ): PluginSettings => ({
   isHighlightedTehtar: false,
   tehtarColor: '',
-  tengCsurFont: 'TengwarTelcontar',
-  tengAsciiFont: 'TengwarAnnatar',
+  tengAsciiFont: 'annatar',
+  tengCsurFont: 'alcarin',
   tengwarKeywrod: '',
   ...data,
 });
