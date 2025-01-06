@@ -16,7 +16,7 @@ To add text in Tengwar to the document:
 
 You may need to set different fonts for different notes, other than the main font selected in the settings.
 
-To do this, in the code block, add the font name separated by a `-` to the keyword `teng`
+To do this, in the code block, add the font name separated by a `-` to the keyword `teng`.
 
 Examples: `teng`, `teng-annatar`, `teng-eldamar`, `teng-primate`, `teng-alcarin`, `teng-artano`, `teng-telcontar`, `teng-freemono`.
 
