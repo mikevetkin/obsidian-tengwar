@@ -61,7 +61,7 @@ describe('ConScript Unicode Registry (U+E000 - U+E07F)', () => {
     { font: 'alcarin', expectedClass: 'alcarin' },
     { font: 'telcontar', expectedClass: 'telcontar' },
     { font: 'artano', expectedClass: 'artano' },
-    { font: 'freeMono', expectedClass: 'freeMono' },
+    { font: 'freemono', expectedClass: 'freemono' },
   ];
 
   tengwarCsurFonts.forEach(({ font, expectedClass }) => {
@@ -101,7 +101,7 @@ describe('ConScript Unicode Registry Tehtars (U+E040 - U+E05D)', () => {
     { font: 'alcarin', expectedClass: 'Alcarin' },
     { font: 'telcontar', expectedClass: 'telcontar' },
     { font: 'artano', expectedClass: 'Artano' },
-    { font: 'freeMono', expectedClass: 'FreeMono' },
+    { font: 'freemono', expectedClass: 'Freemono' },
   ];
 
   tengwarCsurFonts.forEach(({ font, expectedClass }) => {
@@ -134,7 +134,7 @@ describe('Tengwar CSUR Font settings', () => {
     { font: 'alcarin', expectedClass: 'alcarin' },
     { font: 'telcontar', expectedClass: 'telcontar' },
     { font: 'artano', expectedClass: 'artano' },
-    { font: 'freeMono', expectedClass: 'freeMono' },
+    { font: 'freemono', expectedClass: 'freemono' },
   ];
 
   testCases.forEach(({ font, expectedClass }) => {
