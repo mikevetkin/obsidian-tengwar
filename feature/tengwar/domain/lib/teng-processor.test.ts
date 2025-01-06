@@ -177,25 +177,51 @@ describe('Tengwar ASCII Font settings', () => {
 });
 
 describe('Font manual mode', () => {
-  const testCases: { procLang: ProcessorLanguages; expectedClass: string }[] = [
-    { procLang: 'teng-alcarin', expectedClass: 'alcarin' },
-    { procLang: 'teng-telcontar', expectedClass: 'telcontar' },
-    { procLang: 'teng-artano', expectedClass: 'artano' },
-    { procLang: 'teng-freemono', expectedClass: 'freemono' },
-  ];
+  describe('ASCII Fonts', () => {
+    const testCases: { procLang: ProcessorLanguages; expectedClass: string }[] =
+      [
+        { procLang: 'teng-annatar', expectedClass: 'annatar' },
+        { procLang: 'teng-eldamar', expectedClass: 'eldamar' },
+        { procLang: 'teng-primate', expectedClass: 'primate' },
+      ];
 
-  testCases.forEach(({ procLang, expectedClass }) => {
-    it(`Supports ${procLang}, sets ${expectedClass} classname for the block`, () => {
-      tengProcessor(
-        '',
-        block,
-        pluginSettings({
-          tengCsurFont: 'telcontar',
-        }),
-        procLang,
-      );
+    testCases.forEach(({ procLang, expectedClass }) => {
+      it(`Supports ${procLang}, sets ${expectedClass} classname for the block`, () => {
+        tengProcessor(
+          '9t&5#',
+          block,
+          pluginSettings({
+            tengAsciiFont: 'primate',
+          }),
+          procLang,
+        );
 
-      expect(block.classList.contains(expectedClass)).toBe(true);
+        expect(block.classList.contains(expectedClass)).toBe(true);
+      });
+    });
+  });
+  describe('CSUR Fonts', () => {
+    const testCases: { procLang: ProcessorLanguages; expectedClass: string }[] =
+      [
+        { procLang: 'teng-alcarin', expectedClass: 'alcarin' },
+        { procLang: 'teng-telcontar', expectedClass: 'telcontar' },
+        { procLang: 'teng-artano', expectedClass: 'artano' },
+        { procLang: 'teng-freemono', expectedClass: 'freemono' },
+      ];
+
+    testCases.forEach(({ procLang, expectedClass }) => {
+      it(`Supports ${procLang}, sets ${expectedClass} classname for the block`, () => {
+        tengProcessor(
+          '',
+          block,
+          pluginSettings({
+            tengCsurFont: 'telcontar',
+          }),
+          procLang,
+        );
+
+        expect(block.classList.contains(expectedClass)).toBe(true);
+      });
     });
   });
 });
