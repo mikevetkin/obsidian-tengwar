@@ -7,7 +7,7 @@ export const getTengwarFontClass = (
   settings: PluginSettings,
   language: ProcessorLanguages,
 ) => {
-  if (language && language !== 'teng') {
+  if (language && language !== settings.tengwarKeywrod) {
     return language.split('-')[1];
   }
 

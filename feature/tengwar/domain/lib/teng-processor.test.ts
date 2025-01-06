@@ -17,10 +17,22 @@ beforeEach(() => {
 });
 
 describe('Common requirements', () => {
-  it('Sets a id "teng" for the block', () => {
+  it('Sets a id "teng" for the block by default', () => {
     tengProcessor('text', block, pluginSettings(), 'teng');
 
     expect(block.id).toBe('teng');
+  });
+
+  it('If user changed keyword, apply this word for block', () => {
+    tengProcessor(
+      'text',
+      block,
+      pluginSettings({
+        tengwarKeywrod: 'tengwar',
+      }),
+    );
+
+    expect(block.id).toBe('tengwar');
   });
 
   it('Sets a classname "tengwarBlock" for the block', () => {
@@ -39,7 +51,6 @@ describe('Common requirements', () => {
       pluginSettings({
         tengCsurFont: 'telcontar',
       }),
-      'teng',
     );
 
     expect(block.querySelectorAll('br').length).toBe(3);
@@ -75,8 +86,8 @@ describe('ConScript Unicode Registry (U+E000 - U+E07F)', () => {
             block,
             pluginSettings({
               tengCsurFont: font,
+              tengwarKeywrod: 'teng',
             }),
-            'teng',
           );
 
           expect(block.classList.contains(expectedClass)).toBe(true);
@@ -116,8 +127,8 @@ describe('ConScript Unicode Registry Tehtars (U+E040 - U+E05D)', () => {
             pluginSettings({
               tengCsurFont: font,
               isHighlightedTehtar: true,
+              tengwarKeywrod: 'teng',
             }),
-            'teng',
           );
           expect(block.children.length).toBe(1);
           expect(block.children[0].tagName).toBe('SPAN');
@@ -144,6 +155,7 @@ describe('Tengwar CSUR Font settings', () => {
         block,
         pluginSettings({
           tengCsurFont: font,
+          tengwarKeywrod: 'teng',
         }),
         'teng',
       );
@@ -167,6 +179,7 @@ describe('Tengwar ASCII Font settings', () => {
         block,
         pluginSettings({
           tengAsciiFont: font,
+          tengwarKeywrod: 'teng',
         }),
         'teng',
       );
@@ -192,6 +205,7 @@ describe('Font manual mode', () => {
           block,
           pluginSettings({
             tengAsciiFont: 'primate',
+            tengwarKeywrod: 'teng',
           }),
           procLang,
         );
@@ -216,11 +230,37 @@ describe('Font manual mode', () => {
           block,
           pluginSettings({
             tengCsurFont: 'telcontar',
+            tengwarKeywrod: 'teng',
           }),
           procLang,
         );
 
         expect(block.classList.contains(expectedClass)).toBe(true);
+      });
+    });
+  });
+});
+
+describe('Keyword settings', () => {
+  const testCases: { keyword: string; expectedId: string }[] = [
+    { keyword: 'teng', expectedId: 'teng' },
+    { keyword: 'tengwar', expectedId: 'tengwar' },
+    { keyword: 'elfish', expectedId: 'elfish' },
+  ];
+
+  testCases.forEach(({ keyword, expectedId }) => {
+    describe(`If user selected ${keyword} keyword`, () => {
+      it(`Sets ${expectedId} id to block`, () => {
+        tengProcessor(
+          '',
+          block,
+          pluginSettings({
+            tengCsurFont: 'telcontar',
+            tengwarKeywrod: keyword,
+          }),
+        );
+
+        expect(block.id).toBe(expectedId);
       });
     });
   });

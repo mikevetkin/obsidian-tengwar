@@ -8,7 +8,7 @@ export type TengProcessor = (
   source: string,
   el: HTMLElement,
   settings: PluginSettings,
-  language: ProcessorLanguages,
+  language?: ProcessorLanguages,
 ) => void;
 
 export const tengProcessor: TengProcessor = (
@@ -20,9 +20,11 @@ export const tengProcessor: TengProcessor = (
   const encoding = getEncoding(source);
   addTehtarSpans(el, source, settings);
 
-  el.id = language;
+  const lang = language || settings.tengwarKeywrod;
+
+  el.id = lang;
   el.classList.add('tengwarBlock');
-  el.classList.add(getTengwarFontClass(encoding, settings, language));
+  el.classList.add(getTengwarFontClass(encoding, settings, lang));
 };
 
 export const addTehtarSpans = (
