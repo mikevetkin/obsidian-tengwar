@@ -5,7 +5,7 @@ export type CodeBlockProcessor = (
   source: string,
   el: HTMLElement,
   ctx: MarkdownPostProcessorContext,
-) => Promise<any> | void;
+) => Promise<unknown> | void;
 
 export type PluginCodeBlockProcessor = (
   s: PluginSettings,
