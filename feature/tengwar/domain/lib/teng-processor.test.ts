@@ -23,18 +23,6 @@ describe('Common requirements', () => {
     expect(block.id).toBe('teng');
   });
 
-  it('If user changed keyword, apply this word for block', () => {
-    tengProcessor(
-      'text',
-      block,
-      pluginSettings({
-        tengwarKeywrod: 'tengwar',
-      }),
-    );
-
-    expect(block.id).toBe('tengwar');
-  });
-
   it('Sets a classname "tengwarBlock" for the block', () => {
     tengProcessor('text', block, pluginSettings(), 'teng');
 
@@ -189,7 +177,7 @@ describe('Tengwar ASCII Font settings', () => {
   });
 });
 
-describe('Font manual mode', () => {
+describe('Font manual mode (If user specified font in codeblock)', () => {
   describe('ASCII Fonts', () => {
     const testCases: { procLang: ProcessorLanguages; expectedClass: string }[] =
       [
@@ -249,7 +237,7 @@ describe('Keyword settings', () => {
   ];
 
   testCases.forEach(({ keyword, expectedId }) => {
-    describe(`If user selected ${keyword} keyword`, () => {
+    describe(`If user selected "${keyword}" keyword in settings`, () => {
       it(`Sets ${expectedId} id to block`, () => {
         tengProcessor(
           '',
@@ -261,6 +249,32 @@ describe('Keyword settings', () => {
         );
 
         expect(block.id).toBe(expectedId);
+      });
+
+      it(`Applies the font from the settings (ASCII)`, () => {
+        tengProcessor(
+          '9t&5#',
+          block,
+          pluginSettings({
+            tengAsciiFont: 'eldamar',
+            tengwarKeywrod: keyword,
+          }),
+        );
+
+        expect(block.classList.contains('eldamar')).toBe(true);
+      });
+
+      it(`Applies the font from the settings (CSUR)`, () => {
+        tengProcessor(
+          '',
+          block,
+          pluginSettings({
+            tengCsurFont: 'artano',
+            tengwarKeywrod: keyword,
+          }),
+        );
+
+        expect(block.classList.contains('artano')).toBe(true);
       });
     });
   });
