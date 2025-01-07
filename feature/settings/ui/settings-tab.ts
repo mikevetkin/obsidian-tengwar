@@ -6,8 +6,15 @@ import {
   CsurFont,
   CsurFontMap,
 } from 'feature/settings/domain/entity/csur-font';
+import { DEFAULT_PLUGIN_SETTINGS } from 'feature/settings/domain/entity/default-plugin-settings';
 import TengwarObsidianPlugin from 'main';
-import { App, PluginSettingTab, Setting } from 'obsidian';
+import {
+  App,
+  ColorComponent,
+  PluginSettingTab,
+  Setting,
+  TextComponent,
+} from 'obsidian';
 
 export class SettingsTab extends PluginSettingTab {
   plugin: TengwarObsidianPlugin;
@@ -42,15 +49,38 @@ export class SettingsTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName('Color')
       .setDesc('Color of highlighted Tehtars')
-      .addColorPicker((color) =>
-        color
-          .setValue(this.plugin.settings.tehtarColor)
-          .onChange(async (value) => {
-            this.plugin.settings.tehtarColor = value;
-            await this.plugin.saveSettings();
-            this.plugin.refresh();
-          }),
-      );
+      .then((setting) => {
+        let colorComponent: ColorComponent;
+
+        setting
+          .addColorPicker((color) => {
+            colorComponent = color;
+
+            color
+              .setValue(this.plugin.settings.tehtarColor)
+              .onChange(async (value) => {
+                this.plugin.settings.tehtarColor = value;
+                await this.plugin.saveSettings();
+                this.plugin.refresh();
+              });
+
+            return color;
+          })
+          .addExtraButton((button) => {
+            button
+              .setIcon('lucide-rotate-ccw')
+              .setTooltip('Reset to default')
+              .onClick(async () => {
+                const defaultSetting = DEFAULT_PLUGIN_SETTINGS.tehtarColor;
+
+                this.plugin.settings.tehtarColor = defaultSetting;
+                colorComponent.setValue(defaultSetting);
+
+                await this.plugin.saveSettings();
+                this.plugin.refresh();
+              });
+          });
+      });
 
     new Setting(containerEl).setName('Font settings').setHeading();
 
@@ -86,16 +116,40 @@ export class SettingsTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName('Tengwar keyword')
-      .setDesc('Keyword for Tengwar blocks. Defaults to "teng"')
-      .addText((text) =>
-        text
-          .setPlaceholder('teng')
-          .setValue(this.plugin.settings.tengwarKeywrod)
-          .setDisabled(true)
-          .onChange(async (value) => {
-            this.plugin.settings.tengwarKeywrod = value;
-            await this.plugin.saveSettings();
-          }),
-      );
+      .setDesc('Keyword for Tengwar blocks (Reload required)')
+      .then((setting) => {
+        let textComponent: TextComponent;
+
+        setting
+          .addText((text) => {
+            textComponent = text;
+
+            text
+              .setPlaceholder('teng')
+              .setValue(this.plugin.settings.tengwarKeywrod)
+              .onChange(async (value) => {
+                this.plugin.settings.tengwarKeywrod = value;
+
+                await this.plugin.saveSettings();
+                this.plugin.refresh();
+              });
+
+            return text;
+          })
+          .addExtraButton((button) => {
+            button
+              .setIcon('lucide-rotate-ccw')
+              .setTooltip('Reset to default')
+              .onClick(async () => {
+                const defaultSetting = DEFAULT_PLUGIN_SETTINGS.tengwarKeywrod;
+
+                this.plugin.settings.tengwarKeywrod = defaultSetting;
+                textComponent.setValue(defaultSetting);
+
+                await this.plugin.saveSettings();
+                this.plugin.refresh();
+              });
+          });
+      });
   }
 }
