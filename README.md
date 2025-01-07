@@ -20,6 +20,10 @@ To do this, in the code block, add the font name separated by a `-` to the keywo
 
 Examples: `teng`, `teng-annatar`, `teng-eldamar`, `teng-primate`, `teng-alcarin`, `teng-artano`, `teng-telcontar`, `teng-freemono`.
 
+> [!IMPORTANT]
+> If you changed the keyword from `tang` to `elfish` in the settings, you need use font name with this keyword.
+> For example: `elfish-telcontar` or `elfish-eldamar`.
+
 ## Supported encodings
 
 At [the moment](https://en.wikipedia.org/wiki/Tengwar) there are two ways to work with Tengvar on a computer in the community:
@@ -28,6 +32,10 @@ At [the moment](https://en.wikipedia.org/wiki/Tengwar) there are two ways to wor
 - [ConScript Unicode Registry](https://en.wikipedia.org/wiki/ConScript_Unicode_Registry);
 
 Both ways is supported.
+
+## Supported devices
+
+The plugin supports all devices. But at the moment, on Apple devices, there are problems with rendering some CSUR fonts.
 
 ## Contacts
 

@@ -1,7 +1,7 @@
 import { DEFAULT_PLUGIN_SETTINGS } from 'feature/settings/domain/entity/default-plugin-settings';
 import { PluginSettings } from 'feature/settings/domain/entity/plugin-settings';
 import { SettingsTab } from 'feature/settings/ui/settings-tab';
-import { ProcessorLanguagesList } from 'feature/tengwar/domain/entity/processor-languages';
+import { makeProcessorLanguagesList } from 'feature/tengwar/domain/lib/make-processor-languages-list';
 import { refreshProcessors } from 'feature/tengwar/domain/lib/refresh-processors';
 import { tengProcessor } from 'feature/tengwar/domain/lib/teng-processor';
 import { Plugin } from 'obsidian';
@@ -26,11 +26,13 @@ export default class TengwarObsidianPlugin extends Plugin {
   }
 
   registerTengwarProcessors() {
-    ProcessorLanguagesList.forEach((language) => {
-      this.registerMarkdownCodeBlockProcessor(language, (source, el) => {
-        tengProcessor(source, el, this.settings, language);
-      });
-    });
+    makeProcessorLanguagesList(this.settings.tengwarKeywrod).forEach(
+      (language) => {
+        this.registerMarkdownCodeBlockProcessor(language, (source, el) => {
+          tengProcessor(source, el, this.settings, language);
+        });
+      },
+    );
   }
 
   async loadSettings() {
