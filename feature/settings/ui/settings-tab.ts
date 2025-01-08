@@ -29,8 +29,6 @@ export class SettingsTab extends PluginSettingTab {
 
     containerEl.empty();
 
-    new Setting(containerEl).setName('General').setHeading();
-
     new Setting(containerEl)
       .setName('Turn on Tehtar highlighting')
       .setDesc(
