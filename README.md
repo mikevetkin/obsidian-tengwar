@@ -3,10 +3,14 @@
 > An [Obsidian](https://obsidian.md/) plugin that allows you to add [tengwar](https://en.wikipedia.org/wiki/Tengwar) to your notes
 
 <p align="center" width="100%">
-    <img width="720" src="/assets/doc-30fps-720px.gif" />
+    <img width="720" src="/assets/main-screen.png" />
 </p>
 
 ## How to use
+
+<p align="center" width="100%">
+    <img width="720" src="/assets/doc-30fps-720px.gif" />
+</p>
 
 To add text in Tengwar to the document:
 
