@@ -58,6 +58,14 @@ Both ways is supported.
 
 The plugin supports all devices. But at the moment, on Apple devices, there are problems with rendering some CSUR fonts.
 
+## Using with other plugins
+
+By installing Tengwar and [Spaced Repetition](obsidian://show-plugin?id=obsidian-spaced-repetition), you can learn Elvish through flash cards:
+
+<p align="center" width="100%">
+    <img width="720" src="/assets/spaced-30fps-1080px.gif" />
+</p>
+
 ## Editing mode (WIP)
 
 > [!IMPORTANT]
