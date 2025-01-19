@@ -3,7 +3,7 @@
 > An [Obsidian](https://obsidian.md/) plugin that allows you to add [tengwar](https://en.wikipedia.org/wiki/Tengwar) to your notes
 
 <p align="center" width="100%">
-    <img width="480" src="/assets/doc-30fps-720px.gif" />
+    <img width="720" src="/assets/doc-30fps-720px.gif" />
 </p>
 
 ## How to use
@@ -25,7 +25,7 @@ For example:
 ## Apply a specific font on a page
 
 <p align="center" width="100%">
-    <img width="480" src="/assets/teng-artano-30fps-1080px.gif" />
+    <img width="720" src="/assets/teng-artano-30fps-1080px.gif" />
 </p>
 
 You may need to set different fonts for different notes, other than the main font selected in the settings.
