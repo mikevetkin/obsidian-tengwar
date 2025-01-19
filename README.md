@@ -3,13 +3,13 @@
 > An [Obsidian](https://obsidian.md/) plugin that allows you to add [tengwar](https://en.wikipedia.org/wiki/Tengwar) to your notes
 
 <p align="center" width="100%">
-    <img width="720" src="/assets/main-screen.png" />
+    <img width="830" src="/assets/main-screen.png" />
 </p>
 
 ## How to use
 
 <p align="center" width="100%">
-    <img width="720" src="/assets/doc-30fps-720px.gif" />
+    <img width="830" src="/assets/doc-30fps-720px.gif" />
 </p>
 
 To add text in Tengwar to the document:
@@ -29,7 +29,7 @@ For example:
 ## Apply a specific font on a page
 
 <p align="center" width="100%">
-    <img width="720" src="/assets/teng-artano-30fps-1080px.gif" />
+    <img width="830" src="/assets/teng-artano-30fps-1080px.gif" />
 </p>
 
 You may need to set different fonts for different notes, other than the main font selected in the settings.
@@ -67,7 +67,7 @@ The plugin supports all devices. But at the moment, on Apple devices, there are 
 By installing Tengwar and [Spaced Repetition](obsidian://show-plugin?id=obsidian-spaced-repetition), you can learn Elvish through flash cards:
 
 <p align="center" width="100%">
-    <img width="720" src="/assets/spaced-30fps-1080px.gif" />
+    <img width="830" src="/assets/spaced-30fps-1080px.gif" />
 </p>
 
 ## Editing mode (WIP)
