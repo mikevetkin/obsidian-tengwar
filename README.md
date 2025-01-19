@@ -2,9 +2,15 @@
 
 > An [Obsidian](https://obsidian.md/) plugin that allows you to add [tengwar](https://en.wikipedia.org/wiki/Tengwar) to your notes
 
-<img src="/assets/doc-30fps-720px.gif" />
+<p align="center" width="100%">
+    <img width="830" src="/assets/main-screen.png" />
+</p>
 
 ## How to use
+
+<p align="center" width="100%">
+    <img width="830" src="/assets/doc-30fps-720px.gif" />
+</p>
 
 To add text in Tengwar to the document:
 
@@ -12,13 +18,32 @@ To add text in Tengwar to the document:
 - specify the extension `teng`;
 - paste tengwar text.
 
+For example:
+
+````markdown
+```teng
+        
+```
+````
+
 ## Apply a specific font on a page
+
+<p align="center" width="100%">
+    <img width="830" src="/assets/teng-artano-30fps-1080px.gif" />
+</p>
 
 You may need to set different fonts for different notes, other than the main font selected in the settings.
 
-To do this, in the code block, add the font name separated by a `-` to the keyword `teng`.
+To do this, in the code block, add the font name separated by a `-` to the keyword `teng`. For example:
 
-Examples: `teng`, `teng-annatar`, `teng-eldamar`, `teng-primate`, `teng-alcarin`, `teng-artano`, `teng-telcontar`, `teng-freemono`.
+````markdown
+```teng-artano
+.
+.
+```
+````
+
+Other keywords: `teng`, `teng-annatar`, `teng-eldamar`, `teng-primate`, `teng-alcarin`, `teng-artano`, `teng-telcontar`, `teng-freemono`.
 
 > [!IMPORTANT]
 > If you changed the keyword from `tang` to `elfish` in the settings, you need use font name with this keyword.
@@ -36,6 +61,19 @@ Both ways is supported.
 ## Supported devices
 
 The plugin supports all devices. But at the moment, on Apple devices, there are problems with rendering some CSUR fonts.
+
+## Using with other plugins
+
+By installing Tengwar and [Spaced Repetition](obsidian://show-plugin?id=obsidian-spaced-repetition), you can learn Elvish through flash cards:
+
+<p align="center" width="100%">
+    <img width="830" src="/assets/spaced-30fps-1080px.gif" />
+</p>
+
+## Editing mode (WIP)
+
+> [!IMPORTANT]
+> In the editing mode, the Elvish letters turn into nonsense. Support for Tengwar in edit mode is currently in development.
 
 ## Contacts
 
